@@ -33,3 +33,25 @@ describe('includeInSitemap', () => {
     expect(includeInSitemap('https://moose.example/developer-notes/')).toBe(true);
   });
 });
+
+describe('robotsTxt', () => {
+  const site = new URL('https://moose.example/');
+  it('production: allow everything and point at the sitemap', async () => {
+    const { robotsTxt } = await import('../src/lib/seo');
+    expect(robotsTxt(site, false)).toBe('User-agent: *\nAllow: /\n\nSitemap: https://moose.example/sitemap-index.xml\n');
+  });
+  it('preview: disallow everything and advertise no sitemap', async () => {
+    const { robotsTxt } = await import('../src/lib/seo');
+    expect(robotsTxt(site, true)).toBe('User-agent: *\nDisallow: /\n');
+  });
+});
+
+describe('isPreviewEnv', () => {
+  it('is true only for the exact value "preview"', async () => {
+    const { isPreviewEnv } = await import('../src/lib/seo');
+    expect(isPreviewEnv('preview')).toBe(true);
+    expect(isPreviewEnv('production')).toBe(false);
+    expect(isPreviewEnv(undefined)).toBe(false);
+    expect(isPreviewEnv('')).toBe(false);
+  });
+});

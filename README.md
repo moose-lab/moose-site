@@ -98,8 +98,22 @@ coverAlt: Box 里的器械墙
 
 - 构建命令 `pnpm build`，部署命令 `npx wrangler deploy`（配置在 `wrangler.jsonc`）。
 - 构建变量：`SITE_URL`（正式网址，canonical、RSS、sitemap 都用它；没设置时构建会给出警告）、`PNPM_VERSION`（和 `packageManager` 一致）。可选：`PUBLIC_NEWSLETTER_URL`，设置后侧栏出现邮件订阅表单。
+- 预览模式：`PUBLIC_SITE_ENV=preview` 时，所有页面带 `noindex`，`robots.txt` 禁止抓取。正式域名启用前一直开着。
 - 安全响应头在 `public/_headers`，跳转规则在 `public/_redirects`，页面里的 CSP 由 `astro.config.mjs` 的 `security.csp` 生成。
 - 本地预演线上行为：`pnpm build && pnpm exec wrangler dev`。
+
+### 现在：预览阶段
+
+网站部署在 `https://moose-site.<子域>.workers.dev`，构建变量为 `SITE_URL=<这个地址>`、`PUBLIC_SITE_ENV=preview`、`PNPM_VERSION`。能正常访问和分享，但不会被搜索引擎收录。
+
+### 以后：迁移到正式域名
+
+1. 把域名的 DNS 托管到 Cloudflare（在注册商那里改成 Cloudflare 给的 nameserver）。
+2. Workers & Pages → `moose-site` → Settings → Domains & Routes → Add → Custom domain，填入域名。
+3. Settings → Build → Variables：`SITE_URL` 改成 `https://<域名>`，删掉 `PUBLIC_SITE_ENV`。
+4. 重新部署最新一次构建（或推一个提交到 `main`）。
+5. 在 Domains & Routes 里关闭 `workers.dev`，避免同一份内容出现在两个地址。
+6. 检查：页面里的 canonical 是正式域名、`/robots.txt` 允许抓取并指向 sitemap；然后在 Google Search Console 提交 sitemap。
 
 ## 许可
 

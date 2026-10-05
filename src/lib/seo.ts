@@ -20,3 +20,14 @@ export function includeInSitemap(url: string): boolean {
   const path = new URL(url).pathname;
   return !path.startsWith('/dev/') && !/^\/404(\/|\.html)?$/.test(path);
 }
+
+/** PUBLIC_SITE_ENV=preview marks a pre-launch deployment (e.g. the workers.dev URL before the real domain exists). */
+export function isPreviewEnv(value: string | undefined): boolean {
+  return value === 'preview';
+}
+
+/** Production lets crawlers in and points at the sitemap; a preview keeps every crawler out. */
+export function robotsTxt(site: URL, preview: boolean): string {
+  if (preview) return 'User-agent: *\nDisallow: /\n';
+  return `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap-index.xml', site)}\n`;
+}
