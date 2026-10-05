@@ -1,0 +1,8 @@
+---
+interface Props { class?: string }
+const { class: cls } = Astro.props;
+---
+<div class:list={['ruled', 'ruled-card', cls]}><slot /></div>
+<style>
+  .ruled-card { position: relative; border: var(--border-sketch); padding: 16px 24px 18px 62px; box-shadow: var(--shadow-hard); }
+</style>

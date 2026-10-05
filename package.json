@@ -1,0 +1,41 @@
+{
+  "name": "moose-site",
+  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@12.9.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run",
+    "test:schema-guard": "node scripts/expect-build-fail.mjs",
+    "build:fixtures": "MOOSE_CONTENT_ROOT=./tests/fixtures/content astro build",
+    "test:e2e": "pnpm build:fixtures && playwright test",
+    "lhci": "pnpm build:fixtures && lhci autorun",
+    "deploy": "astro build && wrangler deploy"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^8.0.2",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.4",
+    "@fontsource/caveat": "^5.3.0",
+    "@fontsource/zcool-kuaile": "^5.3.0",
+    "astro": "^7.3.5",
+    "sharp": "^0.35.5"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.10",
+    "@axe-core/playwright": "^4.13.0",
+    "@lhci/cli": "^0.15.1",
+    "@playwright/test": "^1.63.0",
+    "@rollup/plugin-yaml": "^5.0.0",
+    "happy-dom": "^20.14.5",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.3",
+    "wrangler": "^4.147.0"
+  }
+}

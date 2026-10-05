@@ -1,0 +1,22 @@
+---
+import { CATEGORIES } from '../../lib/categories';
+// Plain links for category pages (the JS filter only makes sense on the home page's mixed feed).
+interface Props { current: string }
+const { current } = Astro.props;
+const links = [{ slug: 'all', label: '全部', href: '/' }, ...CATEGORIES.map((c) => ({ slug: c.slug, label: c.name, href: `/category/${c.slug}/` }))];
+---
+<nav class="catnav" aria-label="分类">
+  {links.map((l, i) => (
+    <a class:list={['catnav__link', 'f-title', i % 2 ? 'sketch-b' : 'sketch-a']} href={l.href} aria-current={l.slug === current ? 'page' : undefined}>{l.label}</a>
+  ))}
+</nav>
+<style>
+  .catnav { display: flex; flex-wrap: wrap; gap: 10px; }
+  .catnav__link { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 16px; background: var(--card); color: var(--ink); text-decoration: none; font-size: 16px; }
+  .catnav__link:hover { color: var(--ink); background: var(--sticky); }
+  .catnav__link[aria-current='page'] { background: var(--ink); color: var(--card); }
+  @media (max-width: 639.98px) {
+    .catnav { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 8px; scrollbar-width: none; }
+    .catnav__link { flex: none; white-space: nowrap; font-size: 15px; padding: 4px 14px; }
+  }
+</style>

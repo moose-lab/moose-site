@@ -1,0 +1,31 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FeedTimeline from '../../components/feed/FeedTimeline.astro';
+import Pager from '../../components/feed/Pager.astro';
+import { loadFeed } from '../../lib/load-feed';
+import { groupByMonth, FEED_PAGE_SIZE } from '../../lib/feed';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const { items } = await loadFeed();
+  // Home = pinned post + items[0..20). Paginate `items` (not pinned+items) so /feed/2/ starts at items[20]
+  // and nothing appears on both pages. Page 1 is the home page, so it is not generated here.
+  return paginate(items, { pageSize: FEED_PAGE_SIZE }).filter((p) => p.params.page !== undefined && p.params.page !== '1');
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const prevHref = page.currentPage === 2 ? '/' : `/feed/${page.currentPage - 1}/`;
+const nextHref = page.currentPage < page.lastPage ? `/feed/${page.currentPage + 1}/` : null;
+---
+<BaseLayout title={`全部 Feed · 第 ${page.currentPage} 页`} description={`Moose 的全部更新，第 ${page.currentPage} 页。`}>
+  <div class="container listing">
+    <h1 class="listing__title">全部 Feed <span class="f-hand listing__en">/ 第 {page.currentPage} 页</span></h1>
+    <FeedTimeline groups={groupByMonth(page.data)} />
+    <Pager current={page.currentPage} last={page.lastPage} prevHref={prevHref} nextHref={nextHref} />
+  </div>
+</BaseLayout>
+<style>
+  .listing { max-width: 900px; padding-top: 40px; padding-bottom: 88px; }
+  .listing__title { margin: 0 0 40px; font-size: var(--fs-h2); line-height: 1.1; }
+  .listing__en { font-size: 0.6em; color: var(--marker); }
+</style>

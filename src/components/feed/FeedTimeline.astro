@@ -1,0 +1,22 @@
+---
+import type { FeedItem, MonthGroup as Group } from '../../lib/feed';
+import { tiltFor } from '../../lib/feed';
+import PinnedCard from './PinnedCard.astro';
+import MonthGroup from './MonthGroup.astro';
+import EmptyState from './EmptyState.astro';
+interface Props { pinned?: FeedItem | null; groups: Group[] }
+const { pinned = null, groups } = Astro.props;
+const isEmpty = !pinned && groups.length === 0;
+---
+<div class="timeline">
+  <span class="timeline__line" aria-hidden="true"></span>
+  {pinned && <PinnedCard item={pinned} tilt={tiltFor(pinned.id)} />}
+  {groups.map((g) => <MonthGroup group={g} />)}
+  <EmptyState visible={isEmpty} />
+  <slot />
+</div>
+<style>
+  .timeline { position: relative; padding-left: 50px; }
+  .timeline__line { position: absolute; top: 10px; bottom: 70px; left: 12px; border-left: 3px dashed var(--ink); }
+  @media (max-width: 639.98px) { .timeline { padding-left: 0; } .timeline__line { display: none; } }
+</style>

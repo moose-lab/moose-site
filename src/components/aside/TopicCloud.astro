@@ -1,0 +1,16 @@
+---
+import { site } from '../../lib/site';
+---
+{site.topics.length > 0 && (
+  <section aria-labelledby="topics-title">
+    <h2 id="topics-title" class="topics__title f-hand">常写的话题</h2>
+    <ul class="topics">
+      {site.topics.map((t, i) => <li class={i % 2 === 0 ? 'sketch-a' : 'sketch-b'} style={`--r:${[-2, 1, 2, -1, 1.5, -2, 1, -1.5][i % 8]}deg`}>#{t}</li>)}
+    </ul>
+  </section>
+)}
+<style>
+  .topics__title { margin: 0 0 14px; font-size: 32px; font-family: var(--font-hand); font-weight: 700; }
+  .topics { display: flex; flex-wrap: wrap; gap: 10px 12px; margin: 0; padding: 0; list-style: none; }
+  .topics li { padding: 6px 12px; font-size: 15px; transform: rotate(var(--r)); background: var(--card); }
+</style>

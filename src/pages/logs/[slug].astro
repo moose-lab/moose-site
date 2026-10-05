@@ -1,0 +1,28 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LogCard from '../../components/feed/LogCard.astro';
+import { loadFeed } from '../../lib/load-feed';
+import { tiltFor } from '../../lib/feed';
+import { formatLong } from '../../lib/time';
+
+export const getStaticPaths = (async () => {
+  const { items } = await loadFeed();
+  return items.filter((i) => i.type === 'log').map((item) => ({ params: { slug: item.href.split('/')[2] }, props: { item } }));
+}) satisfies GetStaticPaths;
+
+const { item } = Astro.props;
+const rows = (item.rows ?? []).map((r) => `${r.name} ${r.result}`).join('，');
+---
+<BaseLayout title={`${item.title} · 训练日志`} description={`${formatLong(item.date)} 训练日志：${rows}`.slice(0, 120)}>
+  <div class="container permalink">
+    <a class="back f-hand" href="/">← 回到 Feed</a>
+    <h1 class="sr-only">{item.title}</h1>
+    <div class="permalink__card"><LogCard item={item} tilt={tiltFor(item.id)} large /></div>
+  </div>
+</BaseLayout>
+<style>
+  .permalink { max-width: 760px; padding-top: 24px; padding-bottom: 96px; }
+  .back { display: inline-flex; align-items: center; min-height: 44px; font-size: 26px; font-weight: 700; color: var(--marker); text-decoration: none; }
+  .permalink__card { margin-top: 40px; }
+</style>

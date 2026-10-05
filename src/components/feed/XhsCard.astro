@@ -1,0 +1,41 @@
+---
+import { Image } from 'astro:assets';
+import type { FeedItem } from '../../lib/feed';
+import { categoryByName } from '../../lib/categories';
+import { formatShort } from '../../lib/time';
+import Sticker from '../doodle/Sticker.astro';
+import TimelineDot from './TimelineDot.astro';
+interface Props { item: FeedItem; tilt: number }
+const { item, tilt } = Astro.props;
+---
+<article class="item" data-feed-item data-type={item.type} data-cat={categoryByName(item.category).slug} style={`--tilt:${tilt}deg`}>
+  <TimelineDot category={item.category} />
+  <a class="xhs feed-card sketch-b" href={item.href} rel="noopener" target="_blank">
+    <div class="xhs__cover">
+      {item.cover
+        ? <Image src={item.cover} alt={item.coverAlt ?? ''} width={232} height={310} />
+        : <span class="xhs__mark f-title" aria-hidden="true">小红书</span>}
+    </div>
+    <div class="xhs__text">
+      <div class="meta"><Sticker label="小红书笔记" color="var(--cat-xhs)" /><time class="f-hand date" datetime={item.date.toISOString()}>{formatShort(item.date)}</time></div>
+      <h3 class="xhs__title">{item.title}</h3>
+      <span class="more f-hand">去小红书看 →<span class="sr-only">（在小红书打开）</span></span>
+    </div>
+  </a>
+</article>
+<style>
+  .item { position: relative; margin-bottom: 40px; }
+  .xhs { display: flex; gap: 18px; align-items: stretch; max-width: 540px; padding: 16px; background: var(--card); color: var(--ink);
+    text-decoration: none; box-shadow: var(--shadow-hard); }
+  .xhs:hover { color: var(--ink); }
+  .xhs__cover { flex: 0 0 116px; aspect-ratio: 3 / 4; border: 2px solid var(--ink); overflow: hidden; background: var(--cat-xhs);
+    display: flex; align-items: center; justify-content: center; }
+  .xhs__cover :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .xhs__mark { font-size: 18px; transform: rotate(-8deg); }
+  .xhs__text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .date { font-size: 21px; color: var(--ink-muted); }
+  .xhs__title { margin: 0; font-size: 22px; line-height: 1.4; }
+  .more { font-size: 23px; font-weight: 700; color: var(--marker); }
+  @media (max-width: 639.98px) { .item { margin-bottom: 30px; } .xhs__cover { flex-basis: 92px; } .xhs__title { font-size: 19px; } }
+</style>

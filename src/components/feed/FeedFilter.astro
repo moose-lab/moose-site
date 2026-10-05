@@ -1,0 +1,30 @@
+---
+import { CATEGORIES } from '../../lib/categories';
+// counts: total per category slug plus 'all', computed from the whole feed (not only the cards on this page).
+interface Props { counts: Record<string, number> }
+const { counts } = Astro.props;
+const controls = [{ slug: 'all', label: '全部', href: '/' }, ...CATEGORIES.map((c) => ({ slug: c.slug, label: c.name, href: `/category/${c.slug}/` }))];
+---
+<div class="filter" data-feed-filter role="group" aria-label="按分类筛选">
+  {controls.map((c, i) => (
+    <a class:list={['filter__btn', 'f-title', i % 2 === 0 ? 'sketch-a' : 'sketch-b']} href={c.href} data-cat={c.slug}>
+      {c.label}<span class="filter__count f-hand">{counts[c.slug] ?? 0}</span>
+    </a>
+  ))}
+</div>
+<script>
+  import { initFeedFilter } from '../../lib/feed-filter';
+  initFeedFilter(document);
+</script>
+<style>
+  .filter { display: flex; flex-wrap: wrap; gap: 10px; }
+  .filter__btn { display: inline-flex; align-items: baseline; gap: 6px; min-height: 44px; padding: 6px 16px; background: var(--card);
+    color: var(--ink); text-decoration: none; font-size: 16px; cursor: pointer; }
+  .filter__btn:hover { color: var(--ink); background: var(--sticky); }
+  .filter__btn[aria-pressed='true'] { background: var(--ink); color: var(--card); }
+  .filter__count { font-size: 19px; font-weight: 700; }
+  @media (max-width: 639.98px) {
+    .filter { flex-wrap: nowrap; overflow-x: auto; margin: 0 calc(-1 * var(--gutter)); padding: 4px var(--gutter) 8px; scrollbar-width: none; }
+    .filter__btn { flex: none; white-space: nowrap; font-size: 15px; padding: 4px 14px; }
+  }
+</style>

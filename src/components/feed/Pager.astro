@@ -1,0 +1,18 @@
+---
+interface Props { current: number; last: number; prevHref?: string | null; nextHref?: string | null }
+const { current, last, prevHref, nextHref } = Astro.props;
+---
+{(prevHref || nextHref) && (
+  <nav class="pager" aria-label="分页">
+    {prevHref ? <a class="pager__btn sketch-a f-title" href={prevHref} rel="prev">← 较新</a> : <span />}
+    <span class="pager__pos f-hand">第 {current} / {last} 页</span>
+    {nextHref ? <a class="pager__btn sketch-b f-title" href={nextHref} rel="next">更早 →</a> : <span />}
+  </nav>
+)}
+<style>
+  .pager { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 8px 0 0 50px; }
+  .pager__btn { display: inline-flex; align-items: center; min-height: 48px; padding: 6px 22px; background: var(--card); color: var(--ink); text-decoration: none; font-size: 17px; }
+  .pager__btn:hover { color: var(--ink); background: var(--sticky); }
+  .pager__pos { font-size: 22px; color: var(--ink-muted); }
+  @media (max-width: 639.98px) { .pager { margin-left: 0; } .pager__btn { padding: 6px 14px; font-size: 15px; } }
+</style>

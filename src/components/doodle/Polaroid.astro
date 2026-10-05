@@ -1,0 +1,23 @@
+---
+import Tape from './Tape.astro';
+// Rule 6: photos always live in a polaroid or taped frame. Without slot content it shows a placeholder box.
+interface Props { caption?: string; rotate?: number; placeholder?: string; class?: string }
+const { caption, rotate = 3, placeholder = '[照片]', class: cls } = Astro.props;
+const hasImage = Astro.slots.has('default');
+---
+<figure class:list={['polaroid', cls]} style={`--rot:${rotate}deg`}>
+  <Tape width={120} rotate={-4} style="top:-16px;left:50%;margin-left:-60px" />
+  <div class="polaroid__frame">
+    {hasImage ? <slot /> : <div class="polaroid__placeholder">{placeholder}</div>}
+  </div>
+  {caption && <figcaption class="polaroid__caption f-hand">{caption}</figcaption>}
+</figure>
+<style>
+  .polaroid { position: relative; margin: 0; background: var(--card); padding: 14px 14px 64px; border: 2px solid var(--ink);
+    box-shadow: 7px 10px 0 rgba(28, 28, 28, 0.16); transform: rotate(var(--rot)); }
+  .polaroid__frame { overflow: hidden; }
+  .polaroid__frame :global(img) { display: block; width: 100%; height: auto; }
+  .polaroid__placeholder { aspect-ratio: 4 / 5; background: var(--placeholder); border: 2px dashed var(--placeholder-line);
+    display: flex; align-items: center; justify-content: center; color: var(--ink-muted); font-size: 15px; text-align: center; padding: 16px; }
+  .polaroid__caption { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; font-size: 26px; line-height: 1.2; }
+</style>

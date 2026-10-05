@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Moose · 手机版首页</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;family=ZCOOL+KuaiLe&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+a{color:#2A4BD7}a:hover{color:#16288A}
+.f-hand{font-family:'Caveat','ZCOOL KuaiLe',cursive}
+.f-title{font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.sk-paper{background-color:#F7F5EE;background-image:linear-gradient(rgba(42,75,215,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(42,75,215,.09) 1px,transparent 1px);background-size:24px 24px}
+.sk-hl{background:linear-gradient(176deg,transparent 52%,#FFE34D 52%,#FFE34D 88%,transparent 88%);padding:0 6px}
+.sk-box{border:2.5px solid #1C1C1C;border-radius:255px 15px 225px 15px/15px 225px 15px 255px}
+.sk-box2{border:2.5px solid #1C1C1C;border-radius:15px 225px 15px 255px/255px 15px 225px 15px}
+.sk-tape{background:rgba(255,227,77,.78)}
+.sk-tape-blue{background:rgba(191,208,255,.85)}
+.sk-ruled{background-color:#FFFFFF;background-image:linear-gradient(90deg,transparent 36px,rgba(215,38,61,.5) 36px,rgba(215,38,61,.5) 38px,transparent 38px),repeating-linear-gradient(180deg,transparent 0 29px,rgba(42,75,215,.22) 29px 30px)}
+.sk-scroll{scrollbar-width:none}
+.sk-scroll::-webkit-scrollbar{display:none}
+</style>
+</helmet>
+<div class="sk-paper" style="width: 390px; min-height: 4000px; box-sizing: border-box; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; overflow: hidden;">
+
+<header style="display: flex; align-items: center; justify-content: space-between; padding: 12px 18px; border-bottom: 2.5px dashed #1C1C1C;">
+<a href="#" aria-label="Moose 首页" style="display: flex; align-items: center; gap: 8px; color: #1C1C1C; text-decoration: none;">
+<svg width="38" height="35" viewBox="0 0 120 110" fill="none" stroke="currentColor" stroke-width="5.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M46 46 C42 60 40 72 44 84 C47 97 73 97 76 84 C80 72 78 60 74 46 C66 40 54 40 46 46 Z"></path><path d="M48 42 C38 38 28 34 20 26 M20 26 C15 22 13 16 14 10 M24 30 C24 22 27 15 32 11 M34 36 C36 28 40 22 46 19"></path><path d="M72 42 C82 38 92 34 100 26 M100 26 C105 22 107 16 106 10 M96 30 C96 22 93 15 88 11 M86 36 C84 28 80 22 74 19"></path><circle cx="53" cy="60" r="3" fill="currentColor" stroke="none"></circle><circle cx="67" cy="60" r="3" fill="currentColor" stroke="none"></circle></svg>
+<span class="f-hand" style="font-size: 32px; font-weight: 700; line-height: 1;">Moose</span>
+</a>
+<button type="button" aria-label="打开菜单" class="sk-box" style="width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; padding: 0; background: #FFE34D; cursor: pointer; box-shadow: 2px 3px 0 #1C1C1C;">
+<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M4 7 C9 6 15 8 20 7"></path><path d="M4 12 C9 13 15 11 20 12"></path><path d="M4 17 C9 16 15 18 20 17"></path></svg>
+</button>
+</header>
+
+<section style="padding: 28px 20px 8px;">
+<p class="f-hand" style="display: inline-block; margin: 0 0 4px; font-size: 25px; color: {{accent}}; transform: rotate(-3deg);">hi, nice to meet you ~</p>
+<h1 class="f-title" style="margin: 0; font-size: 50px; line-height: 1.12; font-weight: 400;">嗨，我是<br><span class="sk-hl">Moose</span></h1>
+<p style="margin: 18px 0 0; font-size: 16px; line-height: 1.85; color: #3A3A3A;">运动博主 / AI 科学家。<span style="color: #1C1C1C; font-weight: 500; text-decoration: underline wavy {{accent}}; text-decoration-thickness: 2px; text-underline-offset: 6px;">白天调模型，晚上推雪橇。</span>这里是我的草稿本：训练、AI、做产品、追番，想到什么写什么。</p>
+<div class="sk-scroll" style="display: flex; gap: 10px; overflow-x: auto; margin: 18px -20px 0; padding: 6px 20px 10px;">
+<span class="sk-box" style="flex: none; white-space: nowrap; padding: 5px 12px; background: #FFE34D; transform: rotate(-2deg); font-size: 14px; font-weight: 500;">CrossFit</span>
+<span class="sk-box2" style="flex: none; white-space: nowrap; padding: 5px 12px; background: #FFFFFF; transform: rotate(1.5deg); font-size: 14px; font-weight: 500;">HYROX</span>
+<span class="sk-box" style="flex: none; white-space: nowrap; padding: 5px 12px; background: #BFD0FF; transform: rotate(-1deg); font-size: 14px; font-weight: 500;">AI 科学家</span>
+<span class="sk-box2" style="flex: none; white-space: nowrap; padding: 5px 12px; background: #C9F0C2; transform: rotate(2deg); font-size: 14px; font-weight: 500;">做产品</span>
+<span class="sk-box" style="flex: none; white-space: nowrap; padding: 5px 12px; background: #FFC9DE; transform: rotate(-1.5deg); font-size: 14px; font-weight: 500;">二次元</span>
+<span class="sk-box2" style="flex: none; white-space: nowrap; padding: 5px 12px; background: #FFD3C4; transform: rotate(1deg); font-size: 14px; font-weight: 500;">小红书博主</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; margin-top: 20px;">
+<a href="#feed" class="sk-box f-title" style="display: flex; align-items: center; justify-content: center; min-height: 52px; background: #1C1C1C; color: #FFFFFF; text-decoration: none; font-size: 18px; box-shadow: 4px 5px 0 {{accent}};">翻翻最新博客 →</a>
+<a href="#" class="sk-box2 f-title" style="display: flex; align-items: center; justify-content: center; min-height: 52px; background: #FFFFFF; color: #1C1C1C; text-decoration: none; font-size: 18px;">先认识一下我</a>
+</div>
+
+<div style="position: relative; display: flex; justify-content: center; padding: 64px 0 56px;">
+<div style="position: relative; width: 230px; background: #FFFFFF; padding: 10px 10px 48px; box-sizing: border-box; transform: rotate(3deg); border: 2px solid #1C1C1C; box-shadow: 6px 8px 0 rgba(28,28,28,.16);">
+<div class="sk-tape" style="position: absolute; top: -13px; left: 50%; width: 90px; height: 24px; margin-left: -45px; transform: rotate(-4deg);"></div>
+<div style="aspect-ratio: 4 / 5; background: #ECE8DC; border: 2px dashed #8E887C; display: flex; align-items: center; justify-content: center; color: #4F4B44; font-size: 14px; line-height: 1.6; text-align: center;">[你的照片]</div>
+<p class="f-hand" style="position: absolute; left: 0; right: 0; bottom: 10px; margin: 0; text-align: center; font-size: 21px;">练完这组就去写代码</p>
+</div>
+<div class="sk-box" style="position: absolute; top: 8px; right: -4px; background: #FFFFFF; padding: 6px 12px 8px; transform: rotate(5deg); max-width: 160px; box-shadow: 2px 3px 0 #1C1C1C;">
+<p class="f-hand" style="margin: 0; font-size: 19px; line-height: 1.15; font-weight: 700;">本周在练：<br>[训练重点]</p>
+</div>
+<div class="sk-box2" style="position: absolute; bottom: 22px; left: -2px; width: 72px; height: 72px; display: flex; align-items: center; justify-content: center; background: #FFE34D; transform: rotate(-10deg); box-shadow: 2px 3px 0 #1C1C1C;">
+<svg width="48" height="44" viewBox="0 0 120 110" fill="none" stroke="#1C1C1C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M46 46 C42 60 40 72 44 84 C47 97 73 97 76 84 C80 72 78 60 74 46 C66 40 54 40 46 46 Z"></path><path d="M48 42 C38 38 28 34 20 26 M24 30 C24 22 27 15 32 11 M34 36 C36 28 40 22 46 19"></path><path d="M72 42 C82 38 92 34 100 26 M96 30 C96 22 93 15 88 11 M86 36 C84 28 80 22 74 19"></path></svg>
+</div>
+</div>
+</section>
+
+<section id="feed" style="padding: 0 20px 24px;">
+<h2 class="f-title" style="margin: 0; font-size: 38px; font-weight: 400; line-height: 1.15;">最新涂鸦 <span class="f-hand" style="font-size: 26px; color: {{accent}};">/ the feed</span></h2>
+<p style="margin: 6px 0 0; color: #4F4B44; font-size: 14px; line-height: 1.6;">长文、碎碎念、训练日志、小红书笔记</p>
+<div role="group" aria-label="按分类筛选" class="sk-scroll" style="display: flex; gap: 8px; overflow-x: auto; margin: 16px -20px 28px; padding: 4px 20px 8px;">
+<sc-for list="{{chips}}" as="chip" hint-placeholder-count="6">
+<button type="button" onClick="{{chip.pick}}" aria-pressed="{{chip.pressed}}" class="{{chip.cls}}" style="flex: none; white-space: nowrap; display: inline-flex; align-items: baseline; gap: 5px; min-height: 44px; padding: 4px 14px; background: {{chip.bg}}; color: {{chip.fg}}; font-size: 15px; cursor: pointer;">{{chip.label}}<span class="f-hand" style="font-size: 17px; font-weight: 700;">{{chip.count}}</span></button>
+</sc-for>
+</div>
+
+<sc-if value="{{showPinned}}" hint-placeholder-val="{{ true }}">
+<div style="position: relative; margin-bottom: 36px;">
+<a href="Post.dc.html" class="sk-box" style="display: block; background: #FFFFFF; color: #1C1C1C; text-decoration: none; transform: rotate({{pinnedTilt}}deg); box-shadow: 5px 6px 0 #1C1C1C; overflow: hidden;">
+<div style="aspect-ratio: 16 / 9; margin: 10px 10px 0; background: #ECE8DC; border: 2px dashed #8E887C; display: flex; align-items: center; justify-content: center; color: #4F4B44; font-size: 13px;">[置顶文章封面]</div>
+<div style="padding: 16px 18px 18px;">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px;">
+<span class="sk-box2" style="padding: 2px 10px; font-size: 13px; font-weight: 700; background: #FFE34D;">训练 · HYROX</span>
+<span class="f-hand" style="font-size: 20px; color: #4F4B44;">2026.09.28</span>
+</div>
+<h3 class="f-title" style="margin: 0; font-size: 24px; line-height: 1.35; font-weight: 400;">HYROX 八个功能站拆解：配速该怎么分？</h3>
+<p style="margin: 8px 0 8px; font-size: 15px; line-height: 1.7; color: #3A3A3A;">把跑步和功能站拆开看，聊聊备赛思路，和最容易“爆掉”的那几站。</p>
+<span class="f-hand" style="font-size: 22px; font-weight: 700; color: {{accent}};">读下去 →</span>
+</div>
+</a>
+<span class="f-hand" style="position: absolute; top: -16px; left: -6px; padding: 0 12px; font-size: 26px; font-weight: 700; color: #D7263D; border: 3px solid #D7263D; border-radius: 50% 46% 52% 48% / 55% 50% 48% 45%; background: #FFFFFF; transform: rotate(-12deg);">置顶!</span>
+</div>
+</sc-if>
+
+<sc-for list="{{items}}" as="post" hint-placeholder-count="6">
+<div style="margin-bottom: 30px;">
+<sc-if value="{{post.isArticle}}" hint-placeholder-val="{{ true }}">
+<a href="Post.dc.html" class="sk-box" style="display: block; position: relative; background: #FFFFFF; color: #1C1C1C; text-decoration: none; padding: 18px 18px 16px; transform: rotate({{post.tilt}}deg); box-shadow: 4px 5px 0 #1C1C1C;">
+<sc-if value="{{post.tape}}" hint-placeholder-val="{{ false }}">
+<div class="sk-tape" style="position: absolute; top: -12px; right: 30px; width: 70px; height: 22px; transform: rotate(6deg);"></div>
+</sc-if>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 8px;">
+<span class="sk-box2" style="padding: 2px 10px; font-size: 13px; font-weight: 700; background: {{post.color}};">{{post.cat}}</span>
+<span class="f-hand" style="font-size: 20px; color: #4F4B44;">{{post.date}}</span>
+</div>
+<h3 class="f-title" style="margin: 0; font-size: 22px; line-height: 1.4; font-weight: 400;">{{post.title}}</h3>
+<p style="margin: 6px 0 8px; font-size: 15px; line-height: 1.7; color: #3A3A3A;">{{post.excerpt}}</p>
+<span class="f-hand" style="font-size: 22px; font-weight: 700; color: {{accent}};">读下去 →</span>
+</a>
+</sc-if>
+<sc-if value="{{post.isNote}}" hint-placeholder-val="{{ false }}">
+<div style="position: relative; background: #FFF2A8; padding: 20px 20px 14px; transform: rotate({{post.tilt}}deg); box-shadow: 3px 6px 0 rgba(28,28,28,.15);">
+<div class="sk-tape-blue" style="position: absolute; top: -11px; left: 26px; width: 60px; height: 20px; transform: rotate(-5deg);"></div>
+<p class="f-title" style="margin: 0; font-size: 20px; line-height: 1.55;">{{post.title}}</p>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 10px;">
+<span class="f-hand" style="font-size: 19px; color: #4F4B44;">碎碎念 · {{post.date}}</span>
+<span class="sk-box2" style="padding: 1px 9px; font-size: 12px; font-weight: 700; background: {{post.color}};">{{post.cat}}</span>
+</div>
+</div>
+</sc-if>
+<sc-if value="{{post.isLog}}" hint-placeholder-val="{{ false }}">
+<div class="sk-ruled" style="border: 2.5px solid #1C1C1C; padding: 14px 18px 16px 50px; box-sizing: border-box; transform: rotate({{post.tilt}}deg); box-shadow: 4px 5px 0 #1C1C1C;">
+<div style="display: flex; justify-content: space-between; align-items: baseline; gap: 8px;">
+<span class="f-hand" style="font-size: 24px; font-weight: 700;">训练日志</span>
+<span class="f-hand" style="font-size: 19px; color: #4F4B44;">{{post.date}}</span>
+</div>
+<h3 class="f-title" style="margin: 0 0 4px; font-size: 21px; line-height: 1.35; font-weight: 400;">{{post.title}}</h3>
+<sc-for list="{{post.lines}}" as="line" hint-placeholder-count="3">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; height: 30px; font-size: 14px;"><span>{{line.k}}</span><span class="f-hand" style="font-size: 20px; font-weight: 700; color: {{accent}};">{{line.v}}</span></div>
+</sc-for>
+<p class="f-hand" style="margin: 4px 0 0; font-size: 20px; line-height: 1.4;">{{post.excerpt}}</p>
+</div>
+</sc-if>
+<sc-if value="{{post.isXhs}}" hint-placeholder-val="{{ false }}">
+<a href="#" class="sk-box2" style="display: flex; gap: 14px; align-items: stretch; background: #FFFFFF; color: #1C1C1C; text-decoration: none; padding: 12px; transform: rotate({{post.tilt}}deg); box-shadow: 4px 5px 0 #1C1C1C;">
+<div style="flex: 0 0 92px; aspect-ratio: 3 / 4; background: #FFD3C4; border: 2px solid #1C1C1C; display: flex; align-items: center; justify-content: center; text-align: center; color: #3A3A3A; font-size: 11px; line-height: 1.4; padding: 6px; box-sizing: border-box;">[封面 3:4]</div>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 6px;">
+<span class="f-hand" style="font-size: 19px; color: #4F4B44;">小红书笔记 · {{post.date}}</span>
+<h3 class="f-title" style="margin: 0; font-size: 19px; line-height: 1.4; font-weight: 400;">{{post.title}}</h3>
+<span class="f-hand" style="font-size: 21px; font-weight: 700; color: {{accent}};">去小红书看 →</span>
+</div>
+</a>
+</sc-if>
+</div>
+</sc-for>
+
+<sc-if value="{{hasMore}}" hint-placeholder-val="{{ true }}">
+<a href="#" class="sk-box2 f-title" style="display: flex; align-items: center; justify-content: center; min-height: 50px; background: #FFFFFF; color: #1C1C1C; text-decoration: none; font-size: 16px;">{{moreLabel}}</a>
+</sc-if>
+</section>
+
+<section style="padding: 28px 20px 8px; display: flex; flex-direction: column; gap: 36px;">
+<div style="position: relative; background: #FFF2A8; padding: 26px 22px 22px; transform: rotate(-1.5deg); box-shadow: 3px 7px 0 rgba(28,28,28,.14);">
+<div class="sk-tape-blue" style="position: absolute; top: -12px; left: 50%; width: 80px; height: 22px; margin-left: -40px; transform: rotate(3deg);"></div>
+<h3 class="f-hand" style="margin: 0 0 12px; font-size: 30px; line-height: 1;">现在在忙 ↓</h3>
+<ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 15px; line-height: 1.6;">
+<li><strong>做产品｜</strong>[产品名]</li>
+<li><strong>备赛｜</strong>[下一场比赛]</li>
+<li><strong>在追｜</strong>[本季在追的番]</li>
+</ul>
+</div>
+<div class="sk-box2" style="background: #FFFFFF; padding: 22px 20px 22px;">
+<h3 class="f-title" style="margin: 0; font-size: 22px; font-weight: 400;">订阅更新</h3>
+<p style="margin: 6px 0 14px; font-size: 14px; line-height: 1.7; color: #3A3A3A;">新文章发布时收到一封邮件，不刷屏。</p>
+<label for="mb-email" style="display: block; font-size: 13px; font-weight: 700; margin-bottom: 6px;">邮箱</label>
+<input id="mb-email" type="email" placeholder="you@example.com" class="sk-box" style="width: 100%; min-height: 48px; padding: 0 14px; font-size: 15px; font-family: inherit; background: #F7F5EE; box-sizing: border-box;">
+<button type="button" class="sk-box f-title" style="width: 100%; min-height: 48px; margin-top: 10px; background: #1C1C1C; color: #FFFFFF; font-size: 17px; cursor: pointer;">订阅</button>
+</div>
+</section>
+
+<footer style="margin: 28px 20px 0; border-top: 3px dashed #1C1C1C; padding: 22px 0 36px;">
+<nav class="f-title" style="display: flex; flex-wrap: wrap; gap: 0 20px; font-size: 16px;">
+<a href="#" style="padding: 12px 0; color: #1C1C1C; text-decoration: none;">小红书</a>
+<a href="#" style="padding: 12px 0; color: #1C1C1C; text-decoration: none;">GitHub</a>
+<a href="#" style="padding: 12px 0; color: #1C1C1C; text-decoration: none;">邮箱</a>
+<a href="#" style="padding: 12px 0; color: #1C1C1C; text-decoration: none;">RSS</a>
+</nav>
+<p class="f-hand" style="margin: 8px 0 0; font-size: 21px;">用笔和代码画出来的 · © 2026 Moose</p>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2A4BD7","options":["#2A4BD7","#D7263D","#0B7350","#6B3FD4"],"section":"风格"},"wobble":{"editor":"range","default":1,"min":0,"max":2,"step":0.1,"section":"风格"},"$preview":{"width":390,"height":4000}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const accent = this.props.accent ?? '#2A4BD7';
+    const wobble = this.props.wobble ?? 1;
+    const filter = (this.state && this.state.filter) || '全部';
+    const col = { '训练': '#FFE34D', 'AI': '#BFD0FF', '产品': '#C9F0C2', '二次元': '#FFC9DE', '小红书': '#FFD3C4' };
+    const pinnedCat = '训练';
+    const all = [
+      { type: 'note', cat: '训练', date: '09.26', title: '今天的 WOD 把我练成一摊泥。明天继续。' },
+      { type: 'xhs', cat: '小红书', date: '09.25', title: '第一次去 CrossFit Box，新手要注意什么' },
+      { type: 'article', cat: 'AI', date: '09.21', title: '用 Claude 搭一个训练日志 Agent', excerpt: '从记录 WOD 到自动生成周复盘，一个周末能做到哪一步。', tape: true },
+      { type: 'log', cat: '训练', date: '09.19', title: 'HYROX 模拟日', lines: [ { k: '1km 跑 ×4', v: '[用时]' }, { k: '雪橇推 / 拉', v: '[重量]' }, { k: '墙球', v: '[次数]' } ], excerpt: '[一句话训练感受]' },
+      { type: 'note', cat: 'AI', date: '09.17', title: '模型训练和体能训练的共同点：都怕过拟合。' },
+      { type: 'article', cat: '产品', date: '09.14', title: '做运动 AI 产品的第一个月', excerpt: '需求从哪来、MVP 砍到什么程度、踩过的坑，都记在这一页。' },
+      { type: 'note', cat: '二次元', date: '09.10', title: '这季在追 [番剧名]，训练桥段比我的课表还狠。' },
+      { type: 'article', cat: '二次元', date: '09.06', title: '运动番里的训练学：哪些桥段真的有用', excerpt: '边追番边对照运动科学，拆几个热血训练名场面。', tape: true },
+      { type: 'xhs', cat: '小红书', date: '08.30', title: '运动博主的选题库是怎么搭起来的' },
+      { type: 'article', cat: '训练', date: '08.24', title: 'CrossFit 开放赛备赛笔记', excerpt: '技术动作清单 + 每周训练安排，给自己留一份备赛档案。' }
+    ];
+    const tiltSeq = [0.6, -0.5, 0.8, -0.4, 0.5, -0.7];
+    const match = x => filter === '全部' || x.cat === filter;
+    const filtered = all.filter(match);
+    const limit = 6;
+    const items = filtered.slice(0, limit).map((x, i) => ({
+      ...x,
+      color: col[x.cat],
+      tilt: (tiltSeq[i % tiltSeq.length] * wobble).toFixed(2),
+      isArticle: x.type === 'article',
+      isNote: x.type === 'note',
+      isLog: x.type === 'log',
+      isXhs: x.type === 'xhs',
+      tape: x.tape === true,
+      lines: x.lines || [],
+      excerpt: x.excerpt || ''
+    }));
+    const rest = filtered.length - items.length;
+    const cats = ['全部', '训练', 'AI', '产品', '二次元', '小红书'];
+    const chips = cats.map((c, i) => {
+      const on = c === filter;
+      const n = c === '全部' ? all.length + 1 : all.filter(x => x.cat === c).length + (pinnedCat === c ? 1 : 0);
+      return {
+        label: c,
+        count: n,
+        cls: (i % 2 === 0 ? 'sk-box' : 'sk-box2') + ' f-title',
+        bg: on ? '#1C1C1C' : '#FFFFFF',
+        fg: on ? '#FFFFFF' : '#1C1C1C',
+        pressed: on ? 'true' : 'false',
+        pick: () => this.setState({ filter: c })
+      };
+    });
+    return {
+      accent,
+      chips,
+      items,
+      showPinned: filter === '全部' || filter === pinnedCat,
+      pinnedTilt: (-0.4 * wobble).toFixed(2),
+      hasMore: true,
+      moreLabel: rest > 0 ? '还有 ' + rest + ' 条 · 翻更早的几页 ↓' : '翻更早的几页 ↓'
+    };
+  }
+}
+</script>
+</body>
+</html>

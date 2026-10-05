@@ -1,0 +1,42 @@
+---
+// ZCOOL KuaiLe's @font-face sheet is ~72 KB gzipped (93 unicode-range slices). It is attached by a module script
+// after parsing so it never blocks first paint (titles render in the fallback font, then swap); <noscript> covers no-JS.
+import kuaileCss from '@fontsource/zcool-kuaile/400.css?url';
+import '@fontsource/caveat/latin-500.css';
+import '@fontsource/caveat/latin-700.css';
+import '../styles/global.css';
+import BaseHead from '../components/BaseHead.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: Date;
+  noindex?: boolean;
+}
+const { title, description, image, type, publishedTime, noindex } = Astro.props;
+---
+<html lang="zh-CN">
+  <head>
+    <BaseHead title={title} description={description} image={image} type={type} publishedTime={publishedTime} noindex={noindex} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+    <noscript><link rel="stylesheet" href={kuaileCss} /></noscript>
+  </head>
+  <body class="paper">
+    <a class="sr-only skip-link" href="#main">跳到正文</a>
+    <SiteHeader />
+    <main id="main"><slot /></main>
+    <SiteFooter />
+    <script>
+      import href from '@fontsource/zcool-kuaile/400.css?url';
+      // Wait for the first paint (two frames) before requesting the sheet and its font slices.
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        document.head.append(Object.assign(document.createElement('link'), { rel: 'stylesheet', href }));
+      }));
+    </script>
+  </body>
+</html>

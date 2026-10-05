@@ -1,0 +1,9 @@
+---
+interface Props { text?: string; class?: string; style?: string }
+const { text = '置顶!', class: cls, style } = Astro.props;
+---
+<span class:list={['stamp', 'f-hand', cls]} style={style}>{text}</span>
+<style>
+  .stamp { display: inline-block; padding: 2px 14px; font-size: 30px; font-weight: 700; line-height: 1.2; color: var(--stamp);
+    border: 3px solid var(--stamp); border-radius: var(--radius-stamp); background: var(--card); transform: rotate(-12deg); }
+</style>

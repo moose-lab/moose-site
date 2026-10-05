@@ -1,0 +1,18 @@
+---
+import RuledCard from '../doodle/RuledCard.astro';
+import { parseLogItem } from '../../lib/feed';
+interface Props { title: string; items: string[] }
+const { title, items } = Astro.props;
+const rows = items.map(parseLogItem);
+---
+<div class="log-embed"><RuledCard>
+  <p class="log-embed__title f-hand">{title}</p>
+  <dl>{rows.map((r) => <div class="log-embed__row"><dt>{r.name}</dt><dd class="f-hand">{r.result}</dd></div>)}</dl>
+</RuledCard></div>
+<style>
+  .log-embed { max-width: 560px; margin: 32px 0; transform: rotate(-0.5deg); }
+  .log-embed__title { margin: 0; font-size: 28px; font-weight: 700; line-height: 32px; }
+  .log-embed dl { margin: 0; }
+  .log-embed__row { display: flex; justify-content: space-between; gap: 12px; min-height: 32px; align-items: center; font-size: 15px; }
+  .log-embed__row dt, .log-embed__row dd { margin: 0; } .log-embed__row dd { font-size: 22px; font-weight: 700; color: var(--marker); }
+</style>

@@ -1,0 +1,6 @@
+---
+interface Props { visible?: boolean }
+const { visible = false } = Astro.props;
+---
+<p class="empty f-hand" data-feed-empty hidden={!visible}>这个分类还没有涂鸦。</p>
+<style>.empty { margin: 8px 0 40px; font-size: 30px; color: var(--ink-muted); }</style>

@@ -1,0 +1,12 @@
+---
+import { categoryByName, type CategoryName } from '../../lib/categories';
+interface Props { category?: CategoryName; label?: string; color?: string; small?: boolean; class?: string }
+const { category, label, color, small = false, class: cls } = Astro.props;
+const text = label ?? category ?? '';
+const bg = color ?? (category ? `var(${categoryByName(category).token})` : 'var(--card)');
+---
+<span class:list={['sticker', 'sketch-b', { 'sticker--small': small }, cls]} style={`background:${bg}`}>{text}</span>
+<style>
+  .sticker { display: inline-block; padding: 2px 12px; font-size: 14px; font-weight: 700; line-height: 1.6; color: var(--ink); white-space: nowrap; }
+  .sticker--small { padding: 1px 9px; font-size: 12px; }
+</style>

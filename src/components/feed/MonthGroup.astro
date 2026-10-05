@@ -1,0 +1,16 @@
+---
+import type { MonthGroup } from '../../lib/feed';
+import FeedCard from './FeedCard.astro';
+interface Props { group: MonthGroup }
+const { group } = Astro.props;
+---
+<section class="month" aria-label={group.sub} data-month={group.key}>
+  <h3 class="month__label f-hand"><span aria-hidden="true" class="month__dot"></span>{group.label} <span class="month__sub f-title">{group.sub}</span></h3>
+  {group.items.map((item) => <FeedCard item={item} />)}
+</section>
+<style>
+  .month__label { position: relative; margin: 0 0 32px; font-size: 42px; line-height: 1; font-weight: 700; font-family: var(--font-hand); }
+  .month__dot { position: absolute; left: -52px; top: 4px; width: 30px; height: 30px; border-radius: 50%; background: var(--ink); }
+  .month__sub { font-size: 18px; font-weight: 400; color: var(--ink-muted); }
+  @media (max-width: 639.98px) { .month__dot { display: none; } .month__label { font-size: 34px; } }
+</style>

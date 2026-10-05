@@ -1,0 +1,17 @@
+---
+// The doodle moose from the design header. variant="compact" drops ears and nostrils for small sizes.
+interface Props { size?: number; variant?: 'full' | 'compact'; class?: string }
+const { size = 48, variant = 'full', class: cls } = Astro.props;
+---
+<svg class={cls} width={size} height={Math.round(size * 0.92)} viewBox="0 0 120 110" fill="none" stroke="currentColor"
+  stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+  <path d="M46 46 C42 60 40 72 44 84 C47 97 73 97 76 84 C80 72 78 60 74 46 C66 40 54 40 46 46 Z"></path>
+  {variant === 'full' && <path d="M46 48 C38 47 32 50 29 55 C35 58 42 56 47 53"></path>}
+  {variant === 'full' && <path d="M74 48 C82 47 88 50 91 55 C85 58 78 56 73 53"></path>}
+  <path d="M48 42 C38 38 28 34 20 26 M20 26 C15 22 13 16 14 10 M24 30 C24 22 27 15 32 11 M34 36 C36 28 40 22 46 19"></path>
+  <path d="M72 42 C82 38 92 34 100 26 M100 26 C105 22 107 16 106 10 M96 30 C96 22 93 15 88 11 M86 36 C84 28 80 22 74 19"></path>
+  <circle cx="53" cy="60" r="2.5" fill="currentColor" stroke="none"></circle>
+  <circle cx="67" cy="60" r="2.5" fill="currentColor" stroke="none"></circle>
+  {variant === 'full' && <circle cx="54" cy="86" r="2" fill="currentColor" stroke="none"></circle>}
+  {variant === 'full' && <circle cx="66" cy="86" r="2" fill="currentColor" stroke="none"></circle>}
+</svg>

@@ -1,0 +1,33 @@
+---
+import type { FeedItem } from '../../lib/feed';
+import { categoryByName } from '../../lib/categories';
+import { formatShort } from '../../lib/time';
+import Sticker from '../doodle/Sticker.astro';
+import Tape from '../doodle/Tape.astro';
+import TimelineDot from './TimelineDot.astro';
+interface Props { item: FeedItem; tilt: number; large?: boolean }
+const { item, tilt, large = false } = Astro.props;
+---
+<article class="item" data-feed-item data-type={item.type} data-cat={categoryByName(item.category).slug} style={`--tilt:${tilt}deg`}>
+  {!large && <TimelineDot category={item.category} />}
+  <a class:list={['note', 'feed-card', { 'note--large': large }]} href={item.href}>
+    <Tape color="blue" width={74} rotate={-5} style="top:-12px;left:34px" />
+    <p class="note__body f-title">{item.body?.trim()}</p>
+    <div class="note__foot">
+      <span class="f-hand note__date">碎碎念 · <time datetime={item.date.toISOString()}>{formatShort(item.date)}</time></span>
+      <Sticker category={item.category} small />
+    </div>
+  </a>
+</article>
+<style>
+  .item { position: relative; margin-bottom: 40px; }
+  .note { position: relative; display: block; max-width: 470px; padding: 24px 26px 16px; background: var(--sticky); color: var(--ink);
+    text-decoration: none; box-shadow: 3px 8px 0 rgba(28, 28, 28, 0.15); }
+  .note:hover { color: var(--ink); }
+  .note--large { max-width: 640px; padding: 36px 36px 22px; }
+  .note__body { margin: 0; font-size: 23px; line-height: 1.55; white-space: pre-line; }
+  .note--large .note__body { font-size: 30px; }
+  .note__foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-top: 12px; }
+  .note__date { font-size: 21px; color: var(--ink-muted); }
+  @media (max-width: 639.98px) { .item { margin-bottom: 30px; } .note__body { font-size: 20px; } }
+</style>

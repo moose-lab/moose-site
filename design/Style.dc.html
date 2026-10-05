@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>Moose · 涂鸦设计规范</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;family=ZCOOL+KuaiLe&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0}
+.f-hand{font-family:'Caveat','ZCOOL KuaiLe',cursive}
+.f-title{font-family:'ZCOOL KuaiLe','Noto Sans SC',sans-serif}
+.f-mono{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace}
+.sk-paper{background-color:#F7F5EE;background-image:linear-gradient(rgba(42,75,215,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(42,75,215,.09) 1px,transparent 1px);background-size:28px 28px}
+.sk-hl{background:linear-gradient(176deg,transparent 52%,#FFE34D 52%,#FFE34D 88%,transparent 88%);padding:0 6px}
+.sk-box{border:2.5px solid #1C1C1C;border-radius:255px 15px 225px 15px/15px 225px 15px 255px}
+.sk-box2{border:2.5px solid #1C1C1C;border-radius:15px 225px 15px 255px/255px 15px 225px 15px}
+.sk-tape{background:rgba(255,227,77,.78)}
+.sk-tape-blue{background:rgba(191,208,255,.85)}
+.sk-ruled{background-color:#FFFFFF;background-image:linear-gradient(90deg,transparent 30px,rgba(215,38,61,.5) 30px,rgba(215,38,61,.5) 32px,transparent 32px),repeating-linear-gradient(180deg,transparent 0 23px,rgba(42,75,215,.22) 23px 24px)}
+</style>
+</helmet>
+<div class="sk-paper" style="width: 1440px; height: 1640px; box-sizing: border-box; padding: 72px; color: #1C1C1C; font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; overflow: hidden;">
+
+<div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; margin-bottom: 48px;">
+<div>
+<p class="f-hand" style="margin: 0; font-size: 30px; color: #2A4BD7; transform: rotate(-2deg); display: inline-block;">Sketchbook Doodle · v0.1</p>
+<h1 class="f-title" style="margin: 4px 0 0; font-size: 64px; font-weight: 400; line-height: 1.1;">Moose 涂鸦<span class="sk-hl">设计规范</span></h1>
+</div>
+<p class="f-hand" style="margin: 0 0 8px; font-size: 26px; max-width: 420px; text-align: right; line-height: 1.2;">剩下的每一页，都照着这张纸画</p>
+</div>
+
+<div style="display: flex; gap: 40px; margin-bottom: 40px;">
+<div class="sk-box" style="flex: 1.25 1 0; min-width: 0; background: #FFFFFF; padding: 30px 32px 32px; box-shadow: 5px 6px 0 #1C1C1C;">
+<h2 class="f-hand" style="margin: 0 0 18px; font-size: 34px; line-height: 1;">01 色彩</h2>
+<p style="margin: 0 0 12px; font-size: 14px; font-weight: 700;">基础色</p>
+<div style="display: flex; gap: 18px; margin-bottom: 26px;">
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box" style="height: 70px; background: #F7F5EE;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">纸</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#F7F5EE</p></div>
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box2" style="height: 70px; background: #1C1C1C;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">墨</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#1C1C1C</p></div>
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box" style="height: 70px; background: #2A4BD7;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">马克笔蓝</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#2A4BD7</p></div>
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box2" style="height: 70px; background: #FFE34D;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">荧光笔</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#FFE34D</p></div>
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box" style="height: 70px; background: #FFF2A8;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">便利贴</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#FFF2A8</p></div>
+</div>
+<p style="margin: 0 0 12px; font-size: 14px; font-weight: 700;">分类色（只用在贴纸和时间轴圆点）</p>
+<div style="display: flex; gap: 18px;">
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box2" style="height: 54px; background: #FFE34D;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">训练</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#FFE34D</p></div>
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box" style="height: 54px; background: #BFD0FF;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">AI</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#BFD0FF</p></div>
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box2" style="height: 54px; background: #C9F0C2;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">产品</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#C9F0C2</p></div>
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box" style="height: 54px; background: #FFC9DE;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">二次元</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#FFC9DE</p></div>
+<div style="flex: 1 1 0; min-width: 0;"><div class="sk-box2" style="height: 54px; background: #FFD3C4;"></div><p style="margin: 8px 0 0; font-size: 14px; font-weight: 700;">小红书</p><p class="f-mono" style="margin: 2px 0 0; font-size: 12px; color: #4F4B44;">#FFD3C4</p></div>
+</div>
+</div>
+
+<div class="sk-box2" style="flex: 1 1 0; min-width: 0; background: #FFFFFF; padding: 30px 32px 32px; box-shadow: 5px 6px 0 #1C1C1C;">
+<h2 class="f-hand" style="margin: 0 0 18px; font-size: 34px; line-height: 1;">02 字体</h2>
+<div style="padding-bottom: 18px; border-bottom: 2px dashed #BDB7A9;">
+<p class="f-mono" style="margin: 0 0 6px; font-size: 12px; color: #4F4B44;">标题 · ZCOOL KuaiLe 站酷快乐体 · 28–96px</p>
+<p class="f-title" style="margin: 0; font-size: 46px; line-height: 1.15;">嗨，我是 Moose</p>
+</div>
+<div style="padding: 18px 0; border-bottom: 2px dashed #BDB7A9;">
+<p class="f-mono" style="margin: 0 0 6px; font-size: 12px; color: #4F4B44;">批注 · Caveat（中文回退快乐体）· 20–40px</p>
+<p class="f-hand" style="margin: 0; font-size: 34px; line-height: 1.15; color: #2A4BD7;">hi, nice to meet you ~ 读下去 →</p>
+</div>
+<div style="padding-top: 18px;">
+<p class="f-mono" style="margin: 0 0 6px; font-size: 12px; color: #4F4B44;">正文 · Noto Sans SC 思源黑体 · 15–19px / 行高 1.75–1.95</p>
+<p style="margin: 0; font-size: 17px; line-height: 1.8; color: #2A2A2A;">HYROX 的规则很简单：8 段 1 公里跑，每跑完一段接一个功能站，顺序固定。</p>
+</div>
+</div>
+</div>
+
+<div style="display: flex; gap: 40px; margin-bottom: 40px;">
+<div class="sk-box2" style="flex: 1 1 0; min-width: 0; background: #FFFFFF; padding: 30px 32px 28px; box-shadow: 5px 6px 0 #1C1C1C;">
+<h2 class="f-hand" style="margin: 0 0 22px; font-size: 34px; line-height: 1;">03 涂鸦元素</h2>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 26px 20px; align-items: end;">
+<div style="text-align: center;"><div class="sk-box" style="height: 64px; background: #FFFFFF;"></div><p style="margin: 10px 0 0; font-size: 13px;">手绘框 A</p></div>
+<div style="text-align: center;"><div class="sk-box2" style="height: 64px; background: #FFFFFF;"></div><p style="margin: 10px 0 0; font-size: 13px;">手绘框 B</p></div>
+<div style="text-align: center;"><div style="height: 64px; display: flex; align-items: center; justify-content: center;"><div class="sk-tape" style="width: 96px; height: 26px; transform: rotate(-6deg);"></div></div><p style="margin: 10px 0 0; font-size: 13px;">胶带</p></div>
+<div style="text-align: center;"><div style="height: 64px; display: flex; align-items: center; justify-content: center;"><span class="f-title sk-hl" style="font-size: 30px;">重点</span></div><p style="margin: 10px 0 0; font-size: 13px;">荧光笔</p></div>
+<div style="text-align: center;"><div style="height: 64px; display: flex; align-items: center; justify-content: center;"><span style="font-size: 18px; font-weight: 500; text-decoration: underline wavy #2A4BD7; text-decoration-thickness: 2px; text-underline-offset: 7px;">波浪线</span></div><p style="margin: 10px 0 0; font-size: 13px;">波浪下划线</p></div>
+<div style="text-align: center;"><div style="height: 64px; display: flex; align-items: center; justify-content: center; color: #2A4BD7;"><svg width="70" height="56" viewBox="0 0 70 56" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6 C26 4 48 18 60 46"></path><path d="M48 40 L60 47 L63 33"></path></svg></div><p style="margin: 10px 0 0; font-size: 13px;">批注箭头</p></div>
+<div style="text-align: center;"><div style="height: 64px; display: flex; align-items: center; justify-content: center;"><svg width="36" height="36" viewBox="0 0 26 26" fill="#FFE34D" stroke="#1C1C1C" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 C14 9 17 12 24 13 C17 14 14 17 13 24 C12 17 9 14 2 13 C9 12 12 9 13 2 Z"></path></svg></div><p style="margin: 10px 0 0; font-size: 13px;">闪光</p></div>
+<div style="text-align: center;"><div style="height: 64px; display: flex; align-items: center; justify-content: center;"><svg width="60" height="55" viewBox="0 0 120 110" fill="none" stroke="#1C1C1C" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M46 46 C42 60 40 72 44 84 C47 97 73 97 76 84 C80 72 78 60 74 46 C66 40 54 40 46 46 Z"></path><path d="M46 48 C38 47 32 50 29 55 C35 58 42 56 47 53"></path><path d="M74 48 C82 47 88 50 91 55 C85 58 78 56 73 53"></path><path d="M48 42 C38 38 28 34 20 26 M20 26 C15 22 13 16 14 10 M24 30 C24 22 27 15 32 11 M34 36 C36 28 40 22 46 19"></path><path d="M72 42 C82 38 92 34 100 26 M100 26 C105 22 107 16 106 10 M96 30 C96 22 93 15 88 11 M86 36 C84 28 80 22 74 19"></path><circle cx="53" cy="60" r="2.5" fill="#1C1C1C" stroke="none"></circle><circle cx="67" cy="60" r="2.5" fill="#1C1C1C" stroke="none"></circle></svg></div><p style="margin: 10px 0 0; font-size: 13px;">驼鹿 Logo</p></div>
+<div style="text-align: center;"><div style="height: 64px; display: flex; align-items: center; justify-content: center; gap: 10px;"><span style="width: 22px; height: 22px; border-radius: 50%; border: 3px solid #1C1C1C; background: #BFD0FF; box-sizing: border-box;"></span><span style="width: 30px; height: 30px; border-radius: 50%; background: #1C1C1C;"></span></div><p style="margin: 10px 0 0; font-size: 13px;">时间轴圆点</p></div>
+<div style="text-align: center;"><div style="height: 64px; display: flex; align-items: center; justify-content: center;"><span class="f-hand" style="padding: 0 12px; font-size: 26px; font-weight: 700; color: #D7263D; border: 3px solid #D7263D; border-radius: 50% 46% 52% 48% / 55% 50% 48% 45%; transform: rotate(-12deg);">置顶!</span></div><p style="margin: 10px 0 0; font-size: 13px;">印章</p></div>
+</div>
+</div>
+
+<div class="sk-box" style="flex: 1 1 0; min-width: 0; background: #FFFFFF; padding: 30px 32px 28px; box-shadow: 5px 6px 0 #1C1C1C;">
+<h2 class="f-hand" style="margin: 0 0 20px; font-size: 34px; line-height: 1;">04 组件</h2>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-bottom: 20px;">
+<a href="#" class="sk-box f-title" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; background: #1C1C1C; color: #FFFFFF; text-decoration: none; font-size: 17px; box-shadow: 4px 5px 0 #2A4BD7;">主按钮 →</a>
+<a href="#" class="sk-box2 f-title" style="display: inline-flex; align-items: center; min-height: 48px; padding: 0 24px; background: #FFFFFF; color: #1C1C1C; text-decoration: none; font-size: 17px;">次按钮</a>
+<button type="button" class="sk-box f-title" style="min-height: 44px; padding: 0 16px; background: #1C1C1C; color: #FFFFFF; font-size: 15px;">筛选·选中</button>
+<button type="button" class="sk-box2 f-title" style="min-height: 44px; padding: 0 16px; background: #FFFFFF; color: #1C1C1C; font-size: 15px;">筛选·未选</button>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px;">
+<span class="sk-box2" style="padding: 3px 12px; font-size: 13px; font-weight: 700; background: #FFE34D;">训练</span>
+<span class="sk-box" style="padding: 3px 12px; font-size: 13px; font-weight: 700; background: #BFD0FF;">AI</span>
+<span class="sk-box2" style="padding: 3px 12px; font-size: 13px; font-weight: 700; background: #C9F0C2;">产品</span>
+<span class="sk-box" style="padding: 3px 12px; font-size: 13px; font-weight: 700; background: #FFC9DE;">二次元</span>
+<span class="sk-box2" style="padding: 3px 12px; font-size: 13px; font-weight: 700; background: #FFD3C4;">小红书</span>
+</div>
+<p style="margin: 0 0 12px; font-size: 14px; font-weight: 700;">Feed 的四种卡片</p>
+<div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; align-items: start;">
+<div><div class="sk-box" style="height: 92px; background: #FFFFFF; padding: 10px 12px; box-sizing: border-box; transform: rotate(-1deg); box-shadow: 3px 4px 0 #1C1C1C;"><div style="width: 40px; height: 10px; background: #BFD0FF; border-radius: 4px;"></div><div style="margin-top: 10px; height: 8px; background: #1C1C1C; width: 90%; border-radius: 4px;"></div><div style="margin-top: 8px; height: 6px; background: #BDB7A9; width: 70%; border-radius: 4px;"></div></div><p style="margin: 10px 0 0; font-size: 13px; text-align: center;">长文</p></div>
+<div><div style="height: 92px; background: #FFF2A8; padding: 12px; box-sizing: border-box; transform: rotate(1deg); box-shadow: 2px 5px 0 rgba(28,28,28,.15);"><p class="f-title" style="margin: 0; font-size: 13px; line-height: 1.5;">一句话碎碎念</p></div><p style="margin: 10px 0 0; font-size: 13px; text-align: center;">碎碎念</p></div>
+<div><div class="sk-ruled" style="height: 92px; border: 2px solid #1C1C1C; padding: 6px 8px 6px 38px; box-sizing: border-box; transform: rotate(-0.8deg); box-shadow: 3px 4px 0 #1C1C1C;"><p class="f-hand" style="margin: 0; font-size: 17px; line-height: 24px; font-weight: 700;">训练日志</p><p class="f-hand" style="margin: 0; font-size: 15px; line-height: 24px; color: #2A4BD7;">[用时]</p></div><p style="margin: 10px 0 0; font-size: 13px; text-align: center;">训练日志</p></div>
+<div><div class="sk-box2" style="height: 92px; background: #FFFFFF; padding: 8px; box-sizing: border-box; display: flex; gap: 8px; transform: rotate(0.8deg); box-shadow: 3px 4px 0 #1C1C1C;"><div style="width: 54px; height: 72px; background: #FFD3C4; border: 2px solid #1C1C1C; flex: none;"></div><div style="flex: 1 1 auto;"><div style="height: 8px; background: #1C1C1C; border-radius: 4px; width: 90%;"></div><div style="margin-top: 8px; height: 6px; background: #BDB7A9; border-radius: 4px; width: 70%;"></div></div></div><p style="margin: 10px 0 0; font-size: 13px; text-align: center;">小红书笔记</p></div>
+</div>
+</div>
+</div>
+
+<div style="position: relative; background: #FFF2A8; padding: 30px 36px 30px; transform: rotate(-0.6deg); box-shadow: 4px 8px 0 rgba(28,28,28,.14);">
+<div class="sk-tape-blue" style="position: absolute; top: -14px; left: 80px; width: 110px; height: 28px; transform: rotate(-4deg);"></div>
+<div class="sk-tape" style="position: absolute; top: -14px; right: 80px; width: 110px; height: 28px; transform: rotate(4deg);"></div>
+<h2 class="f-hand" style="margin: 0 0 16px; font-size: 36px; line-height: 1;">05 画图守则</h2>
+<ol style="margin: 0; padding-left: 26px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 48px; font-size: 17px; line-height: 1.6;">
+<li>卡片倾斜控制在 ±1° 以内，正文文字永远不歪。</li>
+<li>一屏最多一处荧光笔高亮，多了就不是重点了。</li>
+<li>手写体只用来批注和点缀，读的内容一律用黑体。</li>
+<li>分类色只出现在贴纸和时间轴圆点上，不铺大面积。</li>
+<li>投影统一用墨色硬投影（右下 5–6px），不用模糊阴影。</li>
+<li>照片和配图一律装进拍立得或胶带框里，不裸放。</li>
+</ol>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1640}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

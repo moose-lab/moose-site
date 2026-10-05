@@ -1,0 +1,36 @@
+---
+import type { FeedItem } from '../../lib/feed';
+import { categoryByName } from '../../lib/categories';
+import { formatShort } from '../../lib/time';
+import TimelineDot from './TimelineDot.astro';
+interface Props { item: FeedItem; tilt: number; large?: boolean }
+const { item, tilt, large = false } = Astro.props;
+const feeling = item.body?.trim();
+---
+<article class="item" data-feed-item data-type={item.type} data-cat={categoryByName(item.category).slug} style={`--tilt:${tilt}deg`}>
+  {!large && <TimelineDot category={item.category} />}
+  <a class:list={['log', 'ruled', 'feed-card', { 'log--large': large }]} href={item.href}>
+    <div class="log__head"><span class="f-hand log__kicker">训练日志</span><time class="f-hand log__date" datetime={item.date.toISOString()}>{formatShort(item.date)}</time></div>
+    <h3 class="log__title">{item.title}</h3>
+    <dl class="log__rows">
+      {item.rows?.map((r) => (<div class="log__row"><dt>{r.name}</dt><dd class="f-hand">{r.result}</dd></div>))}
+    </dl>
+    {feeling && <p class="f-hand log__feeling">{feeling}</p>}
+  </a>
+</article>
+<style>
+  .item { position: relative; margin-bottom: 40px; }
+  .log { position: relative; display: block; max-width: 520px; padding: 16px 24px 18px 62px; border: var(--border-sketch);
+    box-shadow: var(--shadow-hard); color: var(--ink); text-decoration: none; }
+  .log:hover { color: var(--ink); }
+  .log--large { max-width: 640px; }
+  .log__head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 10px; }
+  .log__kicker { font-size: 26px; font-weight: 700; }
+  .log__date { font-size: 21px; color: var(--ink-muted); }
+  .log__title { margin: 2px 0 6px; font-size: 24px; line-height: 1.35; }
+  .log__rows { margin: 0; }
+  .log__row { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 32px; font-size: 15px; }
+  .log__row dt { margin: 0; } .log__row dd { margin: 0; font-size: 22px; font-weight: 700; color: var(--marker); }
+  .log__feeling { margin: 6px 0 0; font-size: 22px; line-height: 1.45; }
+  @media (max-width: 639.98px) { .item { margin-bottom: 30px; } .log { padding-left: 50px; } }
+</style>

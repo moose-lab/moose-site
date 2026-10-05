@@ -1,0 +1,11 @@
+---
+// Decorative washi tape. Positioning is the caller's job (pass class/style).
+interface Props { color?: 'yellow' | 'blue'; width?: number; rotate?: number; class?: string; style?: string }
+const { color = 'yellow', width = 96, rotate = -4, class: cls, style = '' } = Astro.props;
+---
+<span aria-hidden="true" class:list={['tape', `tape--${color}`, cls]} style={`width:${width}px;--rot:${rotate}deg;${style}`}></span>
+<style>
+  .tape { display: block; position: absolute; height: 26px; transform: rotate(var(--rot)); pointer-events: none; }
+  .tape--yellow { background: var(--tape-yellow); }
+  .tape--blue { background: var(--tape-blue); }
+</style>

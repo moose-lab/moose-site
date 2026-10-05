@@ -1,0 +1,42 @@
+---
+import { Image } from 'astro:assets';
+import type { FeedItem } from '../../lib/feed';
+import { categoryByName } from '../../lib/categories';
+import { formatShort } from '../../lib/time';
+import Sticker from '../doodle/Sticker.astro';
+import Tape from '../doodle/Tape.astro';
+import TimelineDot from './TimelineDot.astro';
+interface Props { item: FeedItem; tilt: number }
+const { item, tilt } = Astro.props;
+const taped = Math.abs(tilt) >= 0.5;
+---
+<article class="item" data-feed-item data-type={item.type} data-cat={categoryByName(item.category).slug} style={`--tilt:${tilt}deg`}>
+  <TimelineDot category={item.category} />
+  <a class="post feed-card sketch-a" href={item.href}>
+    {taped && <Tape width={90} rotate={6} style="top:-14px;right:44px" />}
+    <div class="post__text">
+      <div class="meta"><Sticker category={item.category} /><time class="f-hand date" datetime={item.date.toISOString()}>{formatShort(item.date)}</time></div>
+      <h3 class="post__title">{item.title}</h3>
+      {item.description && <p class="post__desc">{item.description}</p>}
+      <span class="more f-hand">读下去 →</span>
+    </div>
+    {item.cover && (
+      <div class="post__thumb"><Image src={item.cover} alt={item.coverAlt ?? ''} width={300} height={224} /></div>
+    )}
+  </a>
+</article>
+<style>
+  .item { position: relative; margin-bottom: 40px; }
+  .post { position: relative; display: flex; flex-wrap: wrap; align-items: center; gap: 20px; padding: 22px 24px 22px 28px;
+    background: var(--card); color: var(--ink); text-decoration: none; box-shadow: var(--shadow-hard); }
+  .post:hover { color: var(--ink); }
+  .post__text { flex: 1 1 300px; min-width: 0; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .date { font-size: 22px; color: var(--ink-muted); }
+  .post__title { margin: 0; font-size: var(--fs-card-title); line-height: 1.35; }
+  .post__desc { margin: 8px 0 10px; font-size: 16px; line-height: 1.75; color: var(--ink-2); }
+  .more { font-size: 24px; font-weight: 700; color: var(--marker); }
+  .post__thumb { flex: 0 0 150px; height: 112px; border: 2px solid var(--ink); overflow: hidden; transform: rotate(2deg); }
+  .post__thumb :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 639.98px) { .item { margin-bottom: 30px; } .post { padding: 18px; } .post__title { font-size: 22px; } .post__thumb { display: none; } }
+</style>

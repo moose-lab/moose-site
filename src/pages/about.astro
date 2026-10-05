@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Polaroid from '../components/doodle/Polaroid.astro';
+import MooseLogo from '../components/doodle/MooseLogo.astro';
+import Highlight from '../components/doodle/Highlight.astro';
+import Wavy from '../components/doodle/Wavy.astro';
+import { site, socialLinks, isFilled } from '../lib/site';
+// Long-form "about me" lives in site.yaml → about (editable in the CMS). Until filled, production shows only bio + links.
+const paragraphs = site.about.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+const showPlaceholder = import.meta.env.DEV && !isFilled(site.about);
+---
+<BaseLayout title="关于我" description={`认识一下 ${site.name}：${site.tagline}${site.taglineWavy}在哪里能找到我，以及这个草稿本为什么存在。`}>
+  <div class="container about">
+    <div class="about__art">
+      <Polaroid caption={site.photoCaption || undefined} rotate={-3}>
+        {site.avatar ? <img src={site.avatar} alt={`${site.name} 的照片`} width="300" height="375" /> : <div class="about__moose"><MooseLogo size={140} /></div>}
+      </Polaroid>
+    </div>
+    <div class="about__text">
+      <h1 class="about__title">关于 <Highlight>{site.name}</Highlight></h1>
+      <p class="about__bio">{site.tagline}{site.taglineWavy && <Wavy>{site.taglineWavy}</Wavy>}{site.bio}</p>
+      {paragraphs.map((p) => <p class="about__p">{p}</p>)}
+      {showPlaceholder && <p class="about__p about__todo">[关于我：站长自己写（填在 src/data/site.yaml 的 about 字段）]</p>}
+      {socialLinks.length > 0 && (
+        <ul class="about__links">
+          {socialLinks.map((l, i) => <li><a class:list={['about__link', 'f-title', i % 2 ? 'sketch-b' : 'sketch-a']} href={l.url} rel="me noopener">{l.label}</a></li>)}
+        </ul>
+      )}
+    </div>
+  </div>
+</BaseLayout>
+<style>
+  .about { display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start; padding-top: 56px; padding-bottom: 96px; }
+  .about__art { flex: 0 1 320px; min-width: 0; margin: 0 auto; }
+  .about__moose { aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center; background: var(--placeholder); }
+  .about__text { flex: 1 1 420px; min-width: 0; max-width: var(--post-measure); }
+  .about__title { margin: 0; font-size: var(--fs-h1, clamp(40px, 5.4vw, 66px)); line-height: 1.15; }
+  .about__bio { margin: 24px 0 0; font-size: 20px; line-height: 1.85; color: var(--ink-2); }
+  .about__p { margin: 20px 0 0; font-size: var(--fs-post-body); line-height: var(--lh-post); }
+  .about__todo { color: var(--ink-muted); }
+  .about__links { display: flex; flex-wrap: wrap; gap: 12px; margin: 36px 0 0; padding: 0; list-style: none; }
+  .about__link { display: inline-flex; align-items: center; min-height: 48px; padding: 6px 20px; background: var(--card); color: var(--ink); text-decoration: none; font-size: 17px; }
+  .about__link:hover { color: var(--ink); background: var(--sticky); }
+</style>

@@ -1,0 +1,41 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SketchBox from '../../components/doodle/SketchBox.astro';
+import Tape from '../../components/doodle/Tape.astro';
+import Highlight from '../../components/doodle/Highlight.astro';
+import Wavy from '../../components/doodle/Wavy.astro';
+import Sticker from '../../components/doodle/Sticker.astro';
+import Stamp from '../../components/doodle/Stamp.astro';
+import Arrow from '../../components/doodle/Arrow.astro';
+import Sparkle from '../../components/doodle/Sparkle.astro';
+import MooseLogo from '../../components/doodle/MooseLogo.astro';
+import Polaroid from '../../components/doodle/Polaroid.astro';
+import StickyNote from '../../components/doodle/StickyNote.astro';
+import RuledCard from '../../components/doodle/RuledCard.astro';
+import { CATEGORIES } from '../../lib/categories';
+import FeedTimeline from '../../components/feed/FeedTimeline.astro';
+import { loadFeed } from '../../lib/load-feed';
+import { groupByMonth } from '../../lib/feed';
+
+// Only exists in `astro dev`; production builds generate no /dev/ pages.
+export const getStaticPaths = (() =>
+  import.meta.env.DEV ? [{ params: { page: 'doodles' } }, { params: { page: 'feed' } }] : []) satisfies GetStaticPaths;
+
+const { page } = Astro.params;
+const feed = page === 'feed' ? await loadFeed() : null;
+---
+<BaseLayout title="dev 预览" description="dev only">
+  {feed && <div class="container"><FeedTimeline pinned={feed.pinned} groups={groupByMonth(feed.items)} /></div>}
+  {page === 'doodles' && <div class="container dev-grid">
+    <SketchBox style="height:64px" /> <SketchBox variant="b" style="height:64px" />
+    <div style="position:relative;height:64px"><Tape style="top:20px;left:10px" /></div>
+    <p><Highlight>重点</Highlight> · <Wavy>波浪线</Wavy></p>
+    <p>{CATEGORIES.map((c) => <Sticker category={c.name} />)}</p>
+    <p><Stamp /> <span style="color:var(--marker)"><Arrow /></span> <Sparkle /> <MooseLogo /></p>
+    <Polaroid caption="练完这组就去写代码" />
+    <StickyNote><p>现在在忙</p></StickyNote>
+    <RuledCard><p>训练日志</p></RuledCard>
+  </div>}
+</BaseLayout>
+<style>.dev-grid { display: grid; gap: 32px; padding: 48px 0; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }</style>

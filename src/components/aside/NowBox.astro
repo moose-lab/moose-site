@@ -1,0 +1,18 @@
+---
+import StickyNote from '../doodle/StickyNote.astro';
+import { site, isFilled } from '../../lib/site';
+// Unfilled "[placeholder]" entries are hidden in production, shown in dev so the owner sees what to fill.
+const entries = site.now.filter((e) => import.meta.env.DEV || isFilled(e.value));
+---
+{entries.length > 0 && (
+  <StickyNote>
+    <h2 class="now__title f-hand">现在在忙 ↓</h2>
+    <ul class="now__list">
+      {entries.map((e) => <li><strong>{e.label}｜</strong>{e.value}</li>)}
+    </ul>
+  </StickyNote>
+)}
+<style>
+  .now__title { margin: 0 0 14px; font-size: 34px; line-height: 1; font-family: var(--font-hand); font-weight: 700; }
+  .now__list { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; font-size: 16px; line-height: 1.6; }
+</style>

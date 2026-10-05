@@ -1,0 +1,24 @@
+---
+import MooseLogo from './doodle/MooseLogo.astro';
+import { site, socialLinks } from '../lib/site';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer container">
+  <div class="site-footer__sign">
+    <MooseLogo size={34} variant="compact" />
+    <span class="f-hand">用笔和代码画出来的 · © {year} {site.name}</span>
+  </div>
+  <nav class="site-footer__links f-title" aria-label="社交链接">
+    {socialLinks.map((l) => <a href={l.url} rel="noopener">{l.label}</a>)}
+    <a href="/rss.xml">RSS</a>
+  </nav>
+</footer>
+<style>
+  .site-footer { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px;
+    margin-top: 32px; padding-top: 32px; padding-bottom: 48px; border-top: 3px dashed var(--ink); }
+  .site-footer__sign { display: flex; align-items: center; gap: 10px; font-size: 24px; }
+  .site-footer__links { display: flex; flex-wrap: wrap; gap: 0 24px; font-size: 17px; }
+  .site-footer__links a { color: var(--ink); text-decoration: none; padding: 12px 0; }
+  .site-footer__links a:hover { color: var(--marker); text-decoration: underline wavy var(--marker); }
+  @media (max-width: 639.98px) { .site-footer { flex-direction: column-reverse; align-items: flex-start; } .site-footer__sign { font-size: 21px; } }
+</style>

@@ -1,0 +1,47 @@
+---
+import { Image } from 'astro:assets';
+import type { FeedItem } from '../../lib/feed';
+import { categoryByName } from '../../lib/categories';
+import { formatLong } from '../../lib/time';
+import Sticker from '../doodle/Sticker.astro';
+import Stamp from '../doodle/Stamp.astro';
+import Tape from '../doodle/Tape.astro';
+import TimelineDot from './TimelineDot.astro';
+interface Props { item: FeedItem; tilt: number }
+const { item, tilt } = Astro.props;
+const label = item.tags?.[0] ? `${item.category} · ${item.tags[0]}` : item.category;
+---
+<article class="pinned" data-feed-item data-pinned data-type={item.type} data-cat={categoryByName(item.category).slug} style={`--tilt:${tilt}deg`}>
+  <TimelineDot category={item.category} big />
+  <a class="pinned__card feed-card sketch-a" href={item.href}>
+    <div class="pinned__cover">
+      {item.cover
+        ? <Image src={item.cover} alt={item.coverAlt ?? ''} widths={[480, 800, 1200]} sizes="(max-width: 1024px) 100vw, 760px" />
+        : <span class="pinned__placeholder" aria-hidden="true"></span>}
+    </div>
+    <div class="pinned__body">
+      <div class="meta"><Sticker category={item.category} label={label} /><time class="f-hand date" datetime={item.date.toISOString()}>{formatLong(item.date)}</time></div>
+      <h3 class="pinned__title">{item.title}</h3>
+      {item.description && <p class="pinned__desc">{item.description}</p>}
+      <span class="more f-hand">读下去 →</span>
+    </div>
+  </a>
+  <Stamp class="pinned__stamp" />
+  <Tape width={100} rotate={5} style="top:-12px;right:60px" />
+</article>
+<style>
+  .pinned { position: relative; margin-bottom: 56px; }
+  .pinned__card { display: block; background: var(--card); color: var(--ink); text-decoration: none; box-shadow: 6px 7px 0 var(--ink); overflow: hidden; }
+  .pinned__card:hover { color: var(--ink); }
+  .pinned__cover { margin: 14px 14px 0; aspect-ratio: 16 / 7; overflow: hidden; border: 2px solid var(--ink); background: var(--placeholder); }
+  .pinned__cover :global(img) { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pinned__placeholder { display: block; width: 100%; height: 100%; }
+  .pinned__body { padding: 22px 30px 26px; }
+  .meta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .date { font-size: 22px; color: var(--ink-muted); }
+  .pinned__title { margin: 0; font-size: clamp(28px, 3vw, 36px); line-height: 1.3; }
+  .pinned__desc { margin: 12px 0 14px; font-size: 17px; line-height: 1.75; color: var(--ink-2); }
+  .more { font-size: 26px; font-weight: 700; color: var(--marker); }
+  .pinned :global(.pinned__stamp) { position: absolute; top: -18px; left: -6px; }
+  @media (max-width: 639.98px) { .pinned__body { padding: 16px 18px 18px; } .pinned__title { font-size: 24px; } }
+</style>

@@ -1,0 +1,30 @@
+---
+// M1: RSS only. The email form appears once PUBLIC_NEWSLETTER_URL is configured (a form POST endpoint, e.g. Buttondown).
+const newsletter = import.meta.env.PUBLIC_NEWSLETTER_URL as string | undefined;
+---
+<section class="sub sketch-b" aria-labelledby="sub-title">
+  <h2 id="sub-title" class="sub__title">订阅更新</h2>
+  <p class="sub__text">新文章发布时第一时间知道。{newsletter ? '留个邮箱，不刷屏。' : '用 RSS 阅读器订阅就行。'}</p>
+  {newsletter ? (
+    <form class="sub__form" action={newsletter} method="post">
+      <label for="sub-email" class="sub__label">邮箱</label>
+      <div class="sub__row">
+        <input id="sub-email" name="email" type="email" required placeholder="you@example.com" class="sketch-a" />
+        <button type="submit" class="sketch-a f-title">订阅</button>
+      </div>
+    </form>
+  ) : (
+    <a class="sub__rss sketch-a f-title" href="/rss.xml">RSS 订阅</a>
+  )}
+</section>
+<style>
+  .sub { background: var(--card); padding: 26px 26px 28px; }
+  .sub__title { margin: 0; font-size: 24px; }
+  .sub__text { margin: 8px 0 16px; font-size: 15px; line-height: 1.7; color: var(--ink-2); }
+  .sub__label { display: block; font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+  .sub__row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .sub__row input { flex: 1 1 160px; min-width: 0; min-height: 46px; padding: 0 14px; font: inherit; font-size: 15px; background: var(--paper); }
+  .sub__row button, .sub__rss { min-height: 46px; padding: 0 20px; background: var(--ink); color: var(--card); font-size: 17px; cursor: pointer;
+    display: inline-flex; align-items: center; text-decoration: none; }
+  .sub__rss:hover { color: var(--card); }
+</style>

@@ -1,0 +1,7 @@
+---
+interface Props { fill?: string; size?: number; class?: string; style?: string }
+const { fill = 'var(--highlight)', size = 28, class: cls, style } = Astro.props;
+---
+<svg class={cls} style={style} width={size} height={size} viewBox="0 0 26 26" fill={fill} stroke="var(--ink)" stroke-width="2" stroke-linejoin="round" aria-hidden="true">
+  <path d="M13 2 C14 9 17 12 24 13 C17 14 14 17 13 24 C12 17 9 14 2 13 C9 12 12 9 13 2 Z"></path>
+</svg>

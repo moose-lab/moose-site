@@ -1,0 +1,137 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Highlight from '../components/doodle/Highlight.astro';
+import Wavy from '../components/doodle/Wavy.astro';
+import Polaroid from '../components/doodle/Polaroid.astro';
+import Arrow from '../components/doodle/Arrow.astro';
+import Sparkle from '../components/doodle/Sparkle.astro';
+import MooseLogo from '../components/doodle/MooseLogo.astro';
+import FeedFilter from '../components/feed/FeedFilter.astro';
+import FeedTimeline from '../components/feed/FeedTimeline.astro';
+import NowBox from '../components/aside/NowBox.astro';
+import SubscribeBox from '../components/aside/SubscribeBox.astro';
+import TopicCloud from '../components/aside/TopicCloud.astro';
+import { loadFeed } from '../lib/load-feed';
+import { groupByMonth, countByCategory, FEED_PAGE_SIZE } from '../lib/feed';
+import { site, isFilled } from '../lib/site';
+
+const { pinned, items } = await loadFeed();
+const all = pinned ? [pinned, ...items] : items;
+const groups = groupByMonth(items.slice(0, FEED_PAGE_SIZE));
+const counts = countByCategory(all);
+const hasMore = items.length > FEED_PAGE_SIZE;
+const training = site.now.find((e) => e.label === '本周在练');
+const showBubble = training && (import.meta.env.DEV || isFilled(training.value));
+const chipColors = ['var(--cat-train)', 'var(--card)', 'var(--cat-ai)', 'var(--cat-product)', 'var(--cat-acg)', 'var(--cat-xhs)'];
+const chipTilts = [-2, 1.5, -1, 2, -1.5, 1];
+---
+<BaseLayout title={site.name} description={`${site.tagline}${site.taglineWavy}${site.bio}`}>
+  <div class="container">
+    <section class="hero">
+      <div class="hero__text">
+        <p class="hero__hi f-hand">hi, nice to meet you ~</p>
+        <h1 class="hero__title">嗨，我是<br /><Highlight>{site.name}</Highlight></h1>
+        <p class="hero__bio">{site.tagline}{site.taglineWavy && <Wavy>{site.taglineWavy}</Wavy>}{site.bio}</p>
+        {site.identity.length > 0 && (
+          <ul class="hero__chips">
+            {site.identity.map((t, i) => (
+              <li class={i % 2 === 0 ? 'sketch-a' : 'sketch-b'} style={`background:${chipColors[i % 6]};--r:${chipTilts[i % 6]}deg`}>{t}</li>
+            ))}
+          </ul>
+        )}
+        <div class="hero__cta">
+          <a class="btn btn--primary sketch-a f-title" href="#feed">翻翻最新博客 →</a>
+          <a class="btn btn--ghost sketch-b f-title" href="/about/">先认识一下我</a>
+        </div>
+      </div>
+      <div class="hero__art">
+        <Polaroid caption={site.photoCaption || undefined} class="hero__polaroid">
+          {site.avatar ? <img src={site.avatar} alt={`${site.name} 的照片`} width="300" height="375" /> : <div class="hero__moose"><MooseLogo size={160} /></div>}
+        </Polaroid>
+        {showBubble && <p class="hero__bubble sketch-a f-hand">本周在练：<br />{training!.value}</p>}
+        <p class="hero__note hero__note--tl f-hand">练 CrossFit<br />和 HYROX <Arrow size={58} /></p>
+        <p class="hero__note hero__note--br f-hand"><Arrow size={58} rotate={180} />也是 AI 科学家<br />（真的）</p>
+        <div class="hero__sticker sketch-b" aria-hidden="true"><MooseLogo size={60} variant="compact" /></div>
+        <Sparkle size={28} style="position:absolute;top:46%;right:4%" />
+        <Sparkle size={20} fill="var(--cat-ai)" style="position:absolute;top:34%;left:6%" />
+      </div>
+    </section>
+
+    <section id="feed" class="feed" aria-labelledby="feed-title">
+      <div class="feed__head">
+        <div>
+          <h2 id="feed-title" class="feed__title">最新涂鸦 <span class="f-hand feed__en">/ the feed</span></h2>
+          <p class="feed__sub">长文、碎碎念、训练日志、小红书笔记，都在这一条时间线上。</p>
+        </div>
+        <FeedFilter counts={counts} />
+      </div>
+      <div class="feed__body">
+        <div class="feed__main">
+          <FeedTimeline pinned={pinned} groups={groups} />
+          {hasMore && <a class="btn btn--ghost sketch-b f-title more-link" href="/feed/2/">翻更早的几页 ↓</a>}
+        </div>
+        <aside class="feed__aside" aria-label="侧栏">
+          <NowBox />
+          <SubscribeBox />
+          <TopicCloud />
+        </aside>
+      </div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .hero { display: flex; flex-wrap: wrap; align-items: center; gap: 56px; padding: 44px 0 96px; }
+  .hero__text { flex: 1 1 520px; min-width: 0; }
+  .hero__hi { display: inline-block; margin: 0 0 6px; font-size: 30px; color: var(--marker); transform: rotate(-3deg); }
+  .hero__title { margin: 0; font-size: var(--fs-hero); line-height: 1.1; }
+  .hero__bio { margin: 28px 0 0; max-width: 540px; font-size: 19px; line-height: 1.85; color: var(--ink-2); }
+  .hero__chips { display: flex; flex-wrap: wrap; gap: 12px; margin: 28px 0 0; padding: 0; list-style: none; }
+  .hero__chips li { padding: 6px 14px; font-size: 15px; font-weight: 500; transform: rotate(var(--r)); }
+  .hero__cta { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 36px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 10px 28px; font-size: 19px; text-decoration: none; }
+  .btn--primary { background: var(--ink); color: var(--card); box-shadow: 4px 5px 0 var(--marker); }
+  .btn--primary:hover { color: var(--card); transform: translate(-1px, -1px); }
+  .btn--ghost { background: var(--card); color: var(--ink); }
+  .btn--ghost:hover { color: var(--ink); background: var(--sticky); }
+
+  .hero__art { flex: 1 1 380px; min-width: 0; position: relative; display: flex; justify-content: center; padding: 84px 0 92px; }
+  .hero__art :global(.hero__polaroid) { width: min(330px, 78%); }
+  .hero__moose { aspect-ratio: 4 / 5; display: flex; align-items: center; justify-content: center; background: var(--placeholder); color: var(--ink); }
+  .hero__bubble { position: absolute; top: 10px; right: 0; max-width: 210px; margin: 0; padding: 10px 18px 12px; background: var(--card);
+    font-size: 23px; line-height: 1.15; font-weight: 700; transform: rotate(5deg); box-shadow: var(--shadow-hard-sm); }
+  .hero__note { position: absolute; margin: 0; display: flex; gap: 2px; color: var(--marker); font-size: 25px; line-height: 1.1; font-weight: 700; }
+  .hero__note--tl { top: 20px; left: 0; align-items: flex-end; transform: rotate(-4deg); }
+  .hero__note--br { bottom: 8px; right: 0; align-items: flex-start; transform: rotate(3deg); }
+  .hero__sticker { position: absolute; bottom: 30px; left: 2%; width: 92px; height: 92px; display: flex; align-items: center; justify-content: center;
+    background: var(--highlight); transform: rotate(-10deg); box-shadow: var(--shadow-hard-sm); }
+
+  .feed { padding: 8px 0 88px; }
+  .feed__head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 20px; margin-bottom: 48px; }
+  .feed__title { margin: 0; font-size: var(--fs-h2); line-height: 1.1; }
+  .feed__en { font-size: 0.6em; color: var(--marker); }
+  .feed__sub { margin: 10px 0 0; color: var(--ink-muted); font-size: 16px; }
+  .feed__body { display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start; }
+  .feed__main { flex: 999 1 600px; min-width: 0; }
+  .feed__aside { flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 44px; padding-top: 8px; }
+  .more-link { margin-left: 50px; font-size: 17px; min-height: 48px; }
+
+  @media (max-width: 639.98px) {
+    .hero { gap: 8px; padding: 28px 0 8px; }
+    .hero__hi { font-size: 25px; }
+    .hero__title { font-size: 50px; }
+    .hero__bio { font-size: 16px; margin-top: 18px; }
+    .hero__chips { flex-wrap: nowrap; overflow-x: auto; margin: 18px calc(-1 * var(--gutter)) 0; padding: 6px var(--gutter) 10px; scrollbar-width: none; }
+    .hero__chips li { flex: none; white-space: nowrap; font-size: 14px; }
+    .hero__cta { flex-direction: column; gap: 12px; margin-top: 20px; }
+    .btn { width: 100%; font-size: 18px; }
+    .hero__art { padding: 64px 0 56px; }
+    .hero__art :global(.hero__polaroid) { width: 230px; }
+    .hero__note, .hero__art :global(svg[width="28"]), .hero__art :global(svg[width="20"]) { display: none; }
+    .hero__bubble { font-size: 19px; max-width: 160px; right: -4px; top: 8px; }
+    .hero__sticker { width: 72px; height: 72px; bottom: 22px; left: -2px; }
+    .feed__title { font-size: 38px; }
+    .feed__head { margin-bottom: 28px; }
+    .more-link { margin-left: 0; width: 100%; }
+  }
+</style>

@@ -1,0 +1,12 @@
+---
+import Tape from './Tape.astro';
+interface Props { rotate?: number; tape?: boolean; class?: string }
+const { rotate = -2, tape = true, class: cls } = Astro.props;
+---
+<div class:list={['sticky', cls]} style={`--rot:${rotate}deg`}>
+  {tape && <Tape color="blue" width={96} rotate={3} style="top:-14px;left:50%;margin-left:-48px" />}
+  <slot />
+</div>
+<style>
+  .sticky { position: relative; background: var(--sticky); padding: 30px 28px 26px; transform: rotate(var(--rot)); box-shadow: var(--shadow-paper); }
+</style>

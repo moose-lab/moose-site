@@ -1,0 +1,13 @@
+---
+import Arrow from '../doodle/Arrow.astro';
+// Margin note. ≥1024px it floats into the right margin (Tufte-style sidenote); below that it sits inline under the text.
+---
+<aside class="mdx-aside f-hand"><Arrow size={44} rotate={160} class="mdx-aside__arrow" /><span><slot /></span></aside>
+<style>
+  .mdx-aside { display: flex; align-items: flex-start; gap: 4px; margin: -8px 0 24px; color: var(--marker); font-size: 24px; line-height: 1.15; font-weight: 700; }
+  .mdx-aside :global(.mdx-aside__arrow) { flex: none; display: none; }
+  @media (min-width: 1024px) {
+    .mdx-aside { float: right; clear: right; width: 230px; margin: 0 -278px 16px 0; transform: rotate(-3deg); }
+    .mdx-aside :global(.mdx-aside__arrow) { display: block; }
+  }
+</style>

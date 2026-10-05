@@ -1,0 +1,6 @@
+---
+type Tag = 'div' | 'article' | 'section' | 'aside' | 'span' | 'li' | 'figure';
+interface Props { variant?: 'a' | 'b'; as?: Tag; class?: string; style?: string }
+const { variant = 'a', as: Tag = 'div', class: cls, style } = Astro.props;
+---
+<Tag class:list={[variant === 'a' ? 'sketch-a' : 'sketch-b', cls]} style={style}><slot /></Tag>

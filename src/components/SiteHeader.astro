@@ -1,0 +1,67 @@
+---
+import MooseLogo from './doodle/MooseLogo.astro';
+import { NAV } from '../lib/nav';
+import { site } from '../lib/site';
+
+const path = Astro.url.pathname;
+const xhs = site.social.xiaohongshu;
+const showXhs = xhs.url.trim() !== '';
+---
+<header class="site-header container">
+  <a class="brand" href="/" aria-label="Moose 首页">
+    <MooseLogo size={48} />
+    <span class="brand__name f-hand">{site.name}</span>
+  </a>
+
+  <nav class="nav-desktop f-title" aria-label="主导航">
+    {NAV.map((n) => (
+      <a href={n.href} aria-current={n.match(path) ? 'page' : undefined}>{n.label}</a>
+    ))}
+  </nav>
+  {showXhs && (
+    <a class="xhs-btn sketch-a f-title" href={xhs.url} rel="noopener" target="_blank">
+      {xhs.label}<span class="sr-only">（在小红书打开）</span>
+    </a>
+  )}
+
+  <details class="nav-mobile">
+    <summary class="nav-mobile__toggle sketch-a" aria-label="打开菜单">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 7 C9 6 15 8 20 7"></path><path d="M4 12 C9 13 15 11 20 12"></path><path d="M4 17 C9 16 15 18 20 17"></path>
+      </svg>
+    </summary>
+    <nav class="nav-mobile__panel sketch-b f-title" aria-label="主导航（手机）">
+      {NAV.map((n) => (
+        <a href={n.href} aria-current={n.match(path) ? 'page' : undefined}>{n.label}</a>
+      ))}
+      {showXhs && <a href={xhs.url} rel="noopener" target="_blank">{xhs.label}</a>}
+    </nav>
+  </details>
+</header>
+
+<style>
+  .site-header { position: relative; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 28px; padding-bottom: 12px; }
+  .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; }
+  .brand__name { font-size: 38px; font-weight: 700; line-height: 1; }
+  .nav-desktop { display: flex; flex-wrap: wrap; gap: 0 28px; font-size: 19px; }
+  .nav-desktop a, .nav-mobile__panel a { color: var(--ink); text-decoration: none; padding: 12px 2px; }
+  .nav-desktop a:hover, .nav-mobile__panel a:hover { color: var(--marker); text-decoration: underline wavy var(--marker); }
+  .nav-desktop a[aria-current='page'], .nav-mobile__panel a[aria-current='page'] { text-decoration: underline wavy var(--marker); text-underline-offset: 8px; }
+  .xhs-btn { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 20px; background: var(--highlight); color: var(--ink);
+    text-decoration: none; font-size: 17px; box-shadow: var(--shadow-hard-sm); }
+  .xhs-btn:hover { color: var(--ink); transform: translate(-1px, -1px); }
+
+  .nav-mobile { display: none; }
+  .nav-mobile__toggle { list-style: none; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;
+    background: var(--highlight); color: var(--ink); cursor: pointer; box-shadow: 2px 3px 0 var(--ink); }
+  .nav-mobile__toggle::-webkit-details-marker { display: none; }
+  .nav-mobile__panel { position: absolute; right: var(--gutter); top: calc(100% - 4px); z-index: 20; display: flex; flex-direction: column;
+    min-width: 200px; padding: 8px 20px; background: var(--card); box-shadow: var(--shadow-hard); font-size: 18px; }
+
+  @media (max-width: 639.98px) {
+    .site-header { padding-top: 12px; padding-bottom: 12px; border-bottom: 2.5px dashed var(--ink); }
+    .brand__name { font-size: 32px; }
+    .nav-desktop, .xhs-btn { display: none; }
+    .nav-mobile { display: block; }
+  }
+</style>

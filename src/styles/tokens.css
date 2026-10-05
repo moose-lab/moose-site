@@ -1,0 +1,105 @@
+/* Moose · 草稿本涂鸦 design tokens
+   提取自 design/*.dc.html 与设计规范板，实现时以此为准 */
+:root {
+  /* 基础色 */
+  --paper: #F7F5EE;
+  --ink: #1C1C1C;
+  --ink-2: #3A3A3A;          /* 正文次级 */
+  --ink-muted: #4F4B44;      /* 日期、说明文字（在 --paper 上对比度达标） */
+  --marker: #2A4BD7;         /* 马克笔蓝：链接、批注、强调 */
+  --marker-dark: #16288A;    /* 链接 hover */
+  --highlight: #FFE34D;      /* 荧光笔 */
+  --sticky: #FFF2A8;         /* 便利贴 */
+  --stamp: #D7263D;          /* 置顶章 */
+  --card: #FFFFFF;
+
+  /* 分类色：只用于贴纸和时间轴圆点 */
+  --cat-train: #FFE34D;
+  --cat-ai: #BFD0FF;
+  --cat-product: #C9F0C2;
+  --cat-acg: #FFC9DE;
+  --cat-xhs: #FFD3C4;
+
+  /* 占位与分隔 */
+  --placeholder: #ECE8DC;
+  --placeholder-line: #8E887C;
+  --rule: #BDB7A9;
+
+  /* 纸张方格 */
+  --grid-line: rgba(42, 75, 215, 0.09);
+  --grid-size: 28px;          /* 手机 24px */
+
+  /* 胶带 */
+  --tape-yellow: rgba(255, 227, 77, 0.78);
+  --tape-blue: rgba(191, 208, 255, 0.85);
+
+  /* 横格卡 */
+  --ruled-line: rgba(42, 75, 215, 0.22);
+  --ruled-margin: rgba(215, 38, 61, 0.5);
+
+  /* 描边、圆角、投影 */
+  --border-sketch: 2.5px solid var(--ink);
+  --radius-sketch-a: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  --radius-sketch-b: 15px 225px 15px 255px / 255px 15px 225px 15px;
+  --radius-stamp: 50% 46% 52% 48% / 55% 50% 48% 45%;
+  --shadow-hard: 5px 6px 0 var(--ink);
+  --shadow-hard-sm: 3px 4px 0 var(--ink);
+  --shadow-paper: 4px 8px 0 rgba(28, 28, 28, 0.14);   /* 便利贴、拍立得 */
+
+  /* 字体 */
+  --font-title: "ZCOOL KuaiLe", -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-hand: "Caveat", "ZCOOL KuaiLe", cursive;
+  --font-body: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+
+  /* 字号（桌面） */
+  --fs-hero: clamp(52px, 7.2vw, 96px);
+  --fs-h2: clamp(38px, 5vw, 60px);
+  --fs-card-title: 26px;
+  --fs-body: 17px;
+  --fs-post-body: 18px;
+  --lh-body: 1.8;
+  --lh-post: 1.95;
+
+  /* 布局 */
+  --container: 1200px;
+  --post-measure: 720px;
+  --gutter: clamp(20px, 4vw, 48px);
+
+  /* 倾斜上限（守则 1） */
+  --tilt-max: 1deg;
+}
+
+/* 纸张背景 */
+.paper {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+}
+
+/* 荧光笔（守则 2：一屏最多一处） */
+.hl {
+  background: linear-gradient(176deg, transparent 52%, var(--highlight) 52%, var(--highlight) 88%, transparent 88%);
+  /* The marker bleeds past the text without pushing neighbouring characters apart (inline use in CJK titles). */
+  padding: 0 0.14em;
+  margin: 0 -0.14em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+.sketch-a { border: var(--border-sketch); border-radius: var(--radius-sketch-a); }
+.sketch-b { border: var(--border-sketch); border-radius: var(--radius-sketch-b); }
+
+.ruled {
+  background-color: var(--card);
+  background-image:
+    linear-gradient(90deg, transparent 44px, var(--ruled-margin) 44px, var(--ruled-margin) 46px, transparent 46px),
+    repeating-linear-gradient(180deg, transparent 0 31px, var(--ruled-line) 31px 32px);
+}
+
+:focus-visible { outline: 2px solid var(--marker); outline-offset: 3px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

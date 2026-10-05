@@ -1,0 +1,39 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import FeedTimeline from '../../../components/feed/FeedTimeline.astro';
+import CategoryNav from '../../../components/feed/CategoryNav.astro';
+import Pager from '../../../components/feed/Pager.astro';
+import { loadFeed } from '../../../lib/load-feed';
+import { CATEGORIES } from '../../../lib/categories';
+import { groupByMonth, categoryItems, FEED_PAGE_SIZE } from '../../../lib/feed';
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const { pinned, items } = await loadFeed();
+  // Empty categories still get page 1 (paginate([]) yields one empty page) so header links never 404.
+  return CATEGORIES.flatMap((c) =>
+    paginate(categoryItems(pinned, items, c.slug), { params: { slug: c.slug }, props: { category: c }, pageSize: FEED_PAGE_SIZE }),
+  );
+}) satisfies GetStaticPaths;
+
+const { page, category } = Astro.props;
+const base = `/category/${category.slug}/`;
+const prevHref = page.currentPage > 1 ? (page.currentPage === 2 ? base : `${base}${page.currentPage - 1}/`) : null;
+const nextHref = page.currentPage < page.lastPage ? `${base}${page.currentPage + 1}/` : null;
+const suffix = page.currentPage > 1 ? ` · 第 ${page.currentPage} 页` : '';
+const descSuffix = page.currentPage > 1 ? `（第 ${page.currentPage} 页）` : '';
+---
+<BaseLayout title={`${category.name} · the feed${suffix}`} description={`Moose 写的「${category.name}」：长文、碎碎念、训练日志和小红书笔记${descSuffix}。`}>
+  <div class="container listing">
+    <h1 class="listing__title">{category.name} <span class="f-hand listing__en">/ the feed</span></h1>
+    <div class="listing__nav"><CategoryNav current={category.slug} /></div>
+    <FeedTimeline groups={groupByMonth(page.data)} />
+    <Pager current={page.currentPage} last={page.lastPage} prevHref={prevHref} nextHref={nextHref} />
+  </div>
+</BaseLayout>
+<style>
+  .listing { max-width: 900px; padding-top: 40px; padding-bottom: 88px; }
+  .listing__title { margin: 0; font-size: var(--fs-h2); line-height: 1.1; }
+  .listing__en { font-size: 0.6em; color: var(--marker); }
+  .listing__nav { margin: 24px 0 44px; }
+</style>

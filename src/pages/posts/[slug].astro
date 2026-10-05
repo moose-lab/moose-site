@@ -1,0 +1,26 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import Aside from '../../components/mdx/Aside.astro';
+import PullQuote from '../../components/mdx/PullQuote.astro';
+import Figure from '../../components/mdx/Figure.astro';
+import LogCardEmbed from '../../components/mdx/LogCardEmbed.astro';
+import { neighbors } from '../../lib/post';
+
+export const getStaticPaths = (async () => {
+  const posts = (await getCollection('posts', (p) => import.meta.env.DEV || !p.data.draft))
+    .sort((a, b) => b.data.date.getTime() - a.data.date.getTime() || a.id.localeCompare(b.id));
+  const link = (p: (typeof posts)[number] | null) => (p ? { href: `/posts/${p.id}/`, title: p.data.title } : null);
+  return posts.map((post) => {
+    const { prev, next } = neighbors(posts, post.id);
+    return { params: { slug: post.id }, props: { post, prev: link(prev), next: link(next) } };
+  });
+}) satisfies GetStaticPaths;
+
+const { post, prev, next } = Astro.props;
+const { Content } = await render(post);
+---
+<PostLayout post={post} prev={prev} next={next}>
+  <Content components={{ Aside, PullQuote, Figure, LogCard: LogCardEmbed }} />
+</PostLayout>

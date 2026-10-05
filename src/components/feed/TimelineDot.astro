@@ -1,0 +1,11 @@
+---
+import { categoryByName, type CategoryName } from '../../lib/categories';
+interface Props { category: CategoryName; big?: boolean }
+const { category, big = false } = Astro.props;
+---
+<span aria-hidden="true" class:list={['dot', { 'dot--big': big }]} style={`background:var(${categoryByName(category).token})`}></span>
+<style>
+  .dot { position: absolute; left: -49px; top: 26px; width: 22px; height: 22px; border-radius: 50%; border: 3px solid var(--ink); }
+  .dot--big { left: -51px; top: 30px; width: 28px; height: 28px; }
+  @media (max-width: 639.98px) { .dot { display: none; } }
+</style>

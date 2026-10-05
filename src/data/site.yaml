@@ -1,0 +1,18 @@
+name: Moose
+tagline: "运动博主 / AI 科学家。"
+taglineWavy: "白天调模型，晚上推雪橇。"
+bio: "这里是我的草稿本：训练、AI、做产品、追番，想到什么写什么。"
+avatar: ""          # [站长照片路径]
+now:
+  - { label: 做产品, value: "[产品名]" }
+  - { label: 备赛, value: "[下一场比赛]" }
+  - { label: 本周在练, value: "[训练重点]" }
+  - { label: 在追, value: "[本季在追的番]" }
+  - { label: 在读, value: "[最近在读的论文 / 书]" }
+social:
+  xiaohongshu: { label: "小红书 @[你的账号]", url: "" }
+  github: { label: GitHub, url: "" }
+  email: { label: 邮箱, url: "" }
+topics: [HYROX, CrossFit, 大模型, Agent, 独立开发, 运动番, 训练日志, 小红书运营]
+identity: [CrossFit, HYROX, AI 科学家, 做产品, 二次元, 小红书博主]
+photoCaption: "练完这组就去写代码"

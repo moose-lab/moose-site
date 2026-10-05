@@ -1,0 +1,15 @@
+---
+import type { FeedItem } from '../../lib/feed';
+import { tiltFor } from '../../lib/feed';
+import PostCard from './PostCard.astro';
+import NoteCard from './NoteCard.astro';
+import LogCard from './LogCard.astro';
+import XhsCard from './XhsCard.astro';
+interface Props { item: FeedItem }
+const { item } = Astro.props;
+const tilt = tiltFor(item.id);
+---
+{item.type === 'post' && <PostCard item={item} tilt={tilt} />}
+{item.type === 'note' && <NoteCard item={item} tilt={tilt} />}
+{item.type === 'log' && <LogCard item={item} tilt={tilt} />}
+{item.type === 'xhs' && <XhsCard item={item} tilt={tilt} />}

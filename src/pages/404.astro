@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Tape from '../components/doodle/Tape.astro';
+import Sparkle from '../components/doodle/Sparkle.astro';
+---
+<BaseLayout title="页面不见了" description="这一页被撕掉了。" noindex>
+  <div class="container nf">
+    <div class="nf__card sketch-b">
+      <Tape width={140} rotate={-8} style="top:-18px;left:28px" />
+      <Tape color="blue" width={110} rotate={6} style="top:-16px;right:36px" />
+      <p class="nf__code f-hand">404</p>
+      <h1 class="nf__title">这一页被撕掉了</h1>
+      <p class="nf__text">可能是链接写错了，也可能这页还在草稿本里。</p>
+      <a class="nf__btn sketch-a f-title" href="/">回到首页</a>
+      <Sparkle size={26} style="position:absolute;right:28px;bottom:30px" />
+    </div>
+  </div>
+</BaseLayout>
+<style>
+  .nf { display: flex; justify-content: center; padding-top: 72px; padding-bottom: 120px; }
+  .nf__card { position: relative; width: min(560px, 100%); padding: 48px 40px 44px; background: var(--card); transform: rotate(-1deg); box-shadow: var(--shadow-hard);
+    clip-path: polygon(0 0, 100% 0, 100% 92%, 94% 96%, 88% 91%, 80% 97%, 72% 92%, 63% 98%, 54% 93%, 45% 98%, 36% 92%, 27% 97%, 18% 91%, 9% 96%, 0 92%); padding-bottom: 72px; }
+  .nf__code { margin: 0; font-size: 64px; line-height: 1; color: var(--marker); font-weight: 700; }
+  .nf__title { margin: 12px 0 0; font-size: clamp(32px, 5vw, 48px); line-height: 1.2; }
+  .nf__text { margin: 16px 0 28px; font-size: 17px; line-height: 1.8; color: var(--ink-2); }
+  .nf__btn { display: inline-flex; align-items: center; min-height: 52px; padding: 8px 26px; background: var(--ink); color: var(--card); text-decoration: none; font-size: 19px; box-shadow: 4px 5px 0 var(--marker); }
+  .nf__btn:hover { color: var(--card); }
+</style>

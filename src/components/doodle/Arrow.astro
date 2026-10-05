@@ -1,0 +1,9 @@
+---
+// Hand-drawn annotation arrow (design/Home.dc.html). Colour follows currentColor.
+interface Props { rotate?: number; size?: number; class?: string }
+const { rotate = 0, size = 64, class: cls } = Astro.props;
+---
+<svg class={cls} width={size} height={Math.round(size * 0.8)} viewBox="0 0 70 56" fill="none" stroke="currentColor" stroke-width="3"
+  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style={rotate ? `transform:rotate(${rotate}deg)` : undefined}>
+  <path d="M4 6 C26 4 48 18 60 46"></path><path d="M48 40 L60 47 L63 33"></path>
+</svg>
