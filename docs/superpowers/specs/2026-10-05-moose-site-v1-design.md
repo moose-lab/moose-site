@@ -320,6 +320,12 @@ draft: boolean           # 默认 false
 
 ## 14. 修订记录
 
+**r4 · 2026-10-06（M2 写作后台，站长已确认）**
+
+- 后台从 Pages CMS 改为 Sveltia CMS，详见 `docs/adr/0002-writing-backend-sveltia-cms.md`。
+- `/admin/` 管理已发布内容和 `site.yaml`；`/admin/drafts/` 连接私有仓库写草稿，发布时由 GitHub Action 校验并搬进公开仓库。
+- `/admin/*` 不进 sitemap，`robots.txt` 禁止抓取，并带 `noindex`。
+
 **r3 · 2026-10-05（M1 终验，站长已确认）**
 
 - 文章 h2 从荧光笔底改为手绘下划线；荧光笔只留给标题和金句。原因：设计稿 `Post.dc.html` 给每个 h2 都加了荧光笔，没有封面的文章第一屏会出现两处高亮，违反画图守则第 2 条（站长决定）。由 E2E 用例守住。
