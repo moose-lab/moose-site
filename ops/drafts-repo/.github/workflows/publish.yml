@@ -1,0 +1,60 @@
+# Copy this file into the PRIVATE repo moose-lab/moose-drafts (see ops/drafts-repo/README.md in moose-site).
+name: 发布草稿
+on:
+  workflow_dispatch:
+    inputs:
+      path:
+        description: 要发布的文件，例如 src/content/posts/hello.mdx
+        required: true
+permissions:
+  contents: write
+concurrency:
+  group: publish-draft
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      DRAFT_PATH: ${{ inputs.path }}
+    steps:
+      - name: Check out drafts
+        uses: actions/checkout@v4
+        with:
+          path: drafts
+      - name: Check out the site
+        uses: actions/checkout@v4
+        with:
+          repository: moose-lab/moose-site
+          token: ${{ secrets.MOOSE_SITE_TOKEN }}
+          path: site
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: site/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install
+        working-directory: site
+        run: pnpm install --frozen-lockfile
+      - name: Copy the draft into the site
+        working-directory: site
+        run: node scripts/publish-draft.mjs --drafts ../drafts --site . --path "$DRAFT_PATH"
+      - name: Validate (types, tests, full build with Zod)
+        working-directory: site
+        run: pnpm check && pnpm test && pnpm build
+      - name: Publish to main
+        working-directory: site
+        run: |
+          git config user.name "moose-lab"
+          git config user.email "moose-lab@users.noreply.github.com"
+          git add src/content
+          git commit -m "content: 发布 $DRAFT_PATH"
+          git push
+      - name: Remove the draft
+        working-directory: drafts
+        run: |
+          git config user.name "moose-lab"
+          git config user.email "moose-lab@users.noreply.github.com"
+          git rm --quiet "$DRAFT_PATH"
+          git commit -m "published: $DRAFT_PATH"
+          git push
