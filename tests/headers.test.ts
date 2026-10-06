@@ -31,6 +31,8 @@ describe('_headers', () => {
     expect(d['connect-src']).toEqual(expect.arrayContaining(["'self'", 'https://unpkg.com', 'https://api.github.com', 'https://www.githubstatus.com']));
     expect(d['img-src']).toEqual(expect.arrayContaining(["'self'", 'blob:', 'data:', 'https://*.githubusercontent.com']));
     expect(d['object-src']).toEqual(["'none'"]);
+    // Sveltia 0.228 loads its UI and icon fonts (Material Symbols) from jsDelivr; without this the admin has no icons.
+    expect(d['font-src']).toEqual(["'self'", 'https://cdn.jsdelivr.net']);
     expect(d['frame-ancestors']).toEqual(["'none'"]);
   });
 });
