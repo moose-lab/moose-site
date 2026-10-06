@@ -1,0 +1,5 @@
+/* Editor preview approximations of the site's MDX components (the real styles live in src/components/mdx). */
+.cms-aside { margin: 0.5em 0; padding-left: 0.8em; border-left: 3px solid #2b5bd7; color: #2b5bd7; font-style: italic; }
+.cms-pullquote { margin: 1em 0; padding: 0.2em 0.5em; font-size: 1.4em; font-weight: 700; background: linear-gradient(176deg, transparent 52%, #ffe34d 52% 88%, transparent 88%); }
+.cms-logcard { margin: 1em 0; padding: 0.8em 1em; border: 2px solid #1c1c1c; background: repeating-linear-gradient(#fff 0 31px, #e6e1d6 31px 32px); }
+.cms-logcard ul { margin: 0.4em 0 0; padding-left: 1.2em; }

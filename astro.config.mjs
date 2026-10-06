@@ -4,6 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import yaml from '@rollup/plugin-yaml';
 import { includeInSitemap } from './src/lib/seo.ts';
+import adminCms from './src/integrations/admin-cms.ts';
 
 // The subscribe form (shown only when PUBLIC_NEWSLETTER_URL is set) posts cross-origin; allow exactly that origin.
 const newsletter = process.env.PUBLIC_NEWSLETTER_URL;
@@ -21,7 +22,7 @@ export default defineConfig({
   trailingSlash: 'always',
   // Remaining CSS is small (~5 KB gzipped); inlining it removes render-blocking requests.
   build: { inlineStylesheets: 'always' },
-  integrations: [mdx(), sitemap({ filter: includeInSitemap })],
+  integrations: [mdx(), sitemap({ filter: includeInSitemap }), adminCms()],
   vite: {
     plugins: [yaml()],
     // Never inline font files as data: URIs — CSP keeps font-src 'self', and separate files cache across pages.
