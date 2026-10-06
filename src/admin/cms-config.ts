@@ -3,7 +3,7 @@ import { LOG_KINDS } from '../content/schemas';
 
 /**
  * Sveltia CMS configuration, generated from the site's own constants so the admin can never drift
- * from the Zod schemas (ADR 0002). `site` edits the public repo; `drafts` edits the private drafts repo.
+ * from the Zod schemas (ADR 0002). `site` edits the public repo; `drafts` edits the private repo moose-lab/moose-drafts.
  */
 export type CmsTarget = 'site' | 'drafts';
 type Field = { name: string; label: string; widget: string; [k: string]: unknown };

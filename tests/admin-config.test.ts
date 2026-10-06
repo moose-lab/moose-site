@@ -21,7 +21,7 @@ describe('Sveltia CMS config', () => {
     expect(ok).toBe(true);
   });
 
-  it('site edits the public repo; drafts edits the private drafts repo', () => {
+  it('site edits the public repo; drafts edits the private moose-drafts repo', () => {
     expect(site.backend).toMatchObject({ name: 'github', repo: 'moose-lab/moose-site', branch: 'main', auth_methods: ['token'] });
     expect(drafts.backend).toMatchObject({ name: 'github', repo: 'moose-lab/moose-drafts', branch: 'main', auth_methods: ['token'] });
   });

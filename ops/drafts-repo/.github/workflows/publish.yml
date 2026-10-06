@@ -17,6 +17,11 @@ jobs:
     env:
       DRAFT_PATH: ${{ inputs.path }}
     steps:
+      - name: Refuse to run in a public repository
+        if: ${{ github.event.repository.private != true }}
+        run: |
+          echo "::error::moose-drafts 必须是私有仓库，否则草稿对所有人可见。请到 Settings → General → Danger Zone → Change repository visibility 改为 Private。"
+          exit 1
       - name: Check out drafts
         uses: actions/checkout@v4
         with:
@@ -46,15 +51,19 @@ jobs:
         working-directory: site
         run: |
           git config user.name "moose-lab"
-          git config user.email "moose-lab@users.noreply.github.com"
+          git config user.email "196345158+moose-lab@users.noreply.github.com"
           git add src/content
-          git commit -m "content: 发布 $DRAFT_PATH"
-          git push
+          if git diff --cached --quiet; then
+            echo "网站上已经是这个版本，不需要新的提交。"
+          else
+            git commit -m "content: 发布 $DRAFT_PATH"
+            git push
+          fi
       - name: Remove the draft
         working-directory: drafts
         run: |
           git config user.name "moose-lab"
-          git config user.email "moose-lab@users.noreply.github.com"
+          git config user.email "196345158+moose-lab@users.noreply.github.com"
           git rm --quiet "$DRAFT_PATH"
           git commit -m "published: $DRAFT_PATH"
           git push

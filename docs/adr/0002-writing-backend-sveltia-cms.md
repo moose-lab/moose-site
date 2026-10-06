@@ -18,7 +18,7 @@
 2. 后台配置用 TypeScript 生成（`src/admin/cms-config.ts`），分类、训练类型等枚举直接引用网站代码里的常量，避免后台和 Zod schema 不一致。生成结果用 Sveltia 自带的 JSON Schema 在单元测试里校验。
 3. 两个入口：
    - `/admin/`：连接公开仓库，用于已发布内容和 `site.yaml`；
-   - `/admin/drafts/`：连接私有仓库 `moose-lab/moose-drafts`，用于写草稿。
+   - `/admin/drafts/`：连接私有仓库 `moose-lab/moose-drafts`，用于写草稿。必须保持私有，发布工作流在仓库公开时拒绝运行。
 4. 不使用 editorial workflow（它会在公开仓库建分支和 PR），也不在公开仓库存未发表的草稿。
 5. 发布草稿：在私有仓库运行 GitHub Action，先在网站仓库里做完整构建校验，通过后再提交到 `main`。保存草稿不会触发 Cloudflare 构建。
 6. 登录方式：GitHub 细粒度 PAT，只授权这两个仓库，权限为 Contents 读写。暂不部署 OAuth Worker。

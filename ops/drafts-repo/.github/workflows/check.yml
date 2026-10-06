@@ -1,0 +1,45 @@
+# Validates every draft against moose-site's schemas after each save from /admin/drafts/.
+# A red ✗ on the commit means a draft would fail the site build; fix it before publishing.
+name: 检查草稿
+on:
+  push:
+    branches: [main]
+    paths: ['src/content/**']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: check-drafts
+  cancel-in-progress: true
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Refuse to run in a public repository
+        if: ${{ github.event.repository.private != true }}
+        run: |
+          echo "::error::moose-drafts 必须是私有仓库，否则草稿对所有人可见。"
+          exit 1
+      - name: Check out drafts
+        uses: actions/checkout@v4
+        with:
+          path: drafts
+      - name: Check out the site (public, read-only)
+        uses: actions/checkout@v4
+        with:
+          repository: moose-lab/moose-site
+          path: site
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: site/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install
+        working-directory: site
+        run: pnpm install --frozen-lockfile
+      - name: Validate drafts (site build with the drafts as content)
+        working-directory: site
+        env:
+          MOOSE_CONTENT_ROOT: ../drafts/src/content
+        run: pnpm build
