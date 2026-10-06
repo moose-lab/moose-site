@@ -29,6 +29,40 @@ pnpm build && pnpm preview
 
 内容默认从 `src/content/` 读取。把这个环境变量指向别的目录，就会改用那里的内容构建。E2E 和 Lighthouse 用它来加载 `tests/fixtures/content/`（`pnpm build:fixtures`），所以测试不依赖真实文章，真实内容也不会混进测试。生产环境不要设置它。
 
+## 写作后台
+
+网站自带一个网页后台（Sveltia CMS，选型理由见 `docs/adr/0002-writing-backend-sveltia-cms.md`），手机和电脑都能用，界面是中文。
+
+| 入口 | 编辑的仓库 | 用途 |
+|---|---|---|
+| `/admin/` | 公开仓库 `moose-site` | 已发布的内容、碎碎念、训练日志、小红书卡片、站点信息（`site.yaml`） |
+| `/admin/drafts/` | 私有仓库 `moose-drafts` | 还没发表的草稿。保存不会触发网站构建 |
+
+注意：在 `/admin/` 里每保存一次，就是一次提交到 `main`，网站会自动重新部署。还没写完的长文请放在 `/admin/drafts/`。
+
+### 第一次使用
+
+1. 在 GitHub 新建一个细粒度个人访问令牌（Settings → Developer settings → Fine-grained tokens）：
+   - 仓库只选 `moose-lab/moose-site` 和 `moose-lab/moose-drafts`；
+   - 权限给 Contents：Read and write；
+   - 有效期 90 天，到期后重新生成。
+2. 打开 `https://<网站>/admin/`，点「使用访问令牌登录」，粘贴令牌。令牌只保存在这台设备的浏览器里，手机丢失时到 GitHub 撤销即可。
+3. 草稿仓库的设置和发布方法见 `ops/drafts-repo/README.md`。
+
+### 写作说明
+
+- **长文**有两种：普通「长文」（`.md`），以及「长文（带组件 · MDX）」（`.mdx`）。只有后者可以插入页边批注、金句和训练卡。网址名要用英文小写和短横线。
+- **图片**用编辑器的图片按钮插入，会存进条目旁边的 `images/` 文件夹，网站上自动加拍立得边框。封面图要填写描述。
+- **碎碎念**的时间按北京时间记录，最多 280 字。**训练日志**每行写「动作 | 结果」。
+- **站点设置**修改的是 `src/data/site.yaml`。后台保存时会重写整个文件，文件里原来的注释会消失。
+- 后台只负责第一道检查。所有内容在构建时还会再用 Zod 校验一遍，不合规的内容不会上线。
+
+### 维护
+
+- 后台程序锁定在 `@sveltia/cms` 的某个确切版本，构建时从 `node_modules` 复制到 `/admin/`，不依赖 CDN 加载主程序。中文语言包和界面字体仍然来自 unpkg 和 jsDelivr，`public/_headers` 里 `/admin/*` 的 CSP 只对后台放行这些来源。
+- 升级时：改 `package.json` 里的版本号，然后跑 `pnpm test`（会用新版本自带的 JSON Schema 校验配置）和 `pnpm test:e2e`。
+- 后台配置不是手写的：由 `src/admin/cms-config.ts` 根据网站代码里的分类、训练类型等常量生成，所以加分类时只需要改一处。
+
 ## 怎么写内容
 
 内容都是 `src/content/` 下的 Markdown 文件，分四个文件夹。分类只能是：`训练`、`AI`、`产品`、`二次元`、`小红书`。日期按北京时间理解，需要精确到时刻时写成 `2026-09-26T21:30:00+08:00`。
