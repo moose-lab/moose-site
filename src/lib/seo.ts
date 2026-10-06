@@ -26,8 +26,8 @@ export function isPreviewEnv(value: string | undefined): boolean {
   return value === 'preview';
 }
 
-/** Production lets crawlers in and points at the sitemap; a preview keeps every crawler out. */
+/** Production lets crawlers in (except the writing admin) and points at the sitemap; a preview keeps every crawler out. */
 export function robotsTxt(site: URL, preview: boolean): string {
   if (preview) return 'User-agent: *\nDisallow: /\n';
-  return `User-agent: *\nAllow: /\n\nSitemap: ${new URL('sitemap-index.xml', site)}\n`;
+  return `User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${new URL('sitemap-index.xml', site)}\n`;
 }

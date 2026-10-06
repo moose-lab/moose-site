@@ -38,7 +38,7 @@ describe('robotsTxt', () => {
   const site = new URL('https://moose.example/');
   it('production: allow everything and point at the sitemap', async () => {
     const { robotsTxt } = await import('../src/lib/seo');
-    expect(robotsTxt(site, false)).toBe('User-agent: *\nAllow: /\n\nSitemap: https://moose.example/sitemap-index.xml\n');
+    expect(robotsTxt(site, false)).toBe('User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://moose.example/sitemap-index.xml\n');
   });
   it('preview: disallow everything and advertise no sitemap', async () => {
     const { robotsTxt } = await import('../src/lib/seo');
