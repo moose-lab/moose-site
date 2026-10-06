@@ -92,3 +92,17 @@ describe('Sveltia CMS config', () => {
     expect(names).toContain('about');
   });
 });
+
+describe('editor components per format', () => {
+  it('.md posts get only built-ins; .mdx posts also get every registered MDX component', async () => {
+    const { components } = await import('../src/admin/cms-components.mjs');
+    const ids = (components as { id: string }[]).map((c) => c.id);
+    const md = field(site, 'posts', 'body').editor_components as string[];
+    const mdx = field(site, 'posts_mdx', 'body').editor_components as string[];
+    for (const id of ids) {
+      expect(md).not.toContain(id);
+      expect(mdx).toContain(id);
+    }
+    expect(md).toEqual(['image', 'code-block']);
+  });
+});

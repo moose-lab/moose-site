@@ -28,7 +28,11 @@ const opt = { required: false };
 const category = (): Field => ({ name: 'category', label: '分类', widget: 'select', options: [...CATEGORY_NAMES] });
 const imagesNextToEntry = { media_folder: 'images', public_folder: './images' };
 
-function postFields(): Field[] {
+/** `.md` cannot render JSX, so only `.mdx` bodies offer the custom components (ids from cms-components.mjs). */
+const BUILT_IN = ['image', 'code-block'];
+const MDX_COMPONENTS = ['aside', 'pullquote', 'logcard'];
+
+function postFields(extension: 'md' | 'mdx'): Field[] {
   return [
     { name: 'slug', label: '网址名（英文小写、数字、短横线）', widget: 'string', pattern: ['^[a-z0-9]+(-[a-z0-9]+)*$', '只能用小写字母、数字和短横线，例如 hyrox-8-stations'] },
     { name: 'title', label: '标题', widget: 'string' },
@@ -42,7 +46,7 @@ function postFields(): Field[] {
     { name: 'coverAlt', label: '封面图描述（有封面时必填）', widget: 'string', ...opt },
     { name: 'pinned', label: '置顶到首页', widget: 'boolean', default: false },
     { name: 'draft', label: '暂时下线（线上隐藏）', widget: 'boolean', default: false },
-    { name: 'body', label: '正文', widget: 'richtext' },
+    { name: 'body', label: '正文', widget: 'richtext', editor_components: extension === 'mdx' ? [...BUILT_IN, ...MDX_COMPONENTS] : BUILT_IN },
   ];
 }
 
@@ -51,7 +55,7 @@ function contentCollections(): Collection[] {
     name, label, folder: 'src/content/posts', extension, format: 'yaml-frontmatter', create: true,
     slug: '{{fields.slug}}', identifier_field: 'title', ...imagesNextToEntry,
     sortable_fields: { fields: ['date', 'title'], default: { field: 'date', direction: 'descending' } },
-    fields: postFields(),
+    fields: postFields(extension),
   });
   return [
     posts('posts', '长文', 'md'),
