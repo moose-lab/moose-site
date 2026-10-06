@@ -47,7 +47,8 @@ pnpm build && pnpm preview
    - 权限给 Contents：Read and write；
    - 有效期 90 天，到期后重新生成。
 2. 打开 `https://<网站>/admin/`，点「使用访问令牌登录」，粘贴令牌。令牌只保存在这台设备的浏览器里，手机丢失时到 GitHub 撤销即可。
-3. 草稿仓库的设置和发布方法见 `ops/drafts-repo/README.md`。
+3. 草稿仓库 `moose-drafts` 的设置和发布方法见 `ops/drafts-repo/README.md`。
+4. 第一次部署后，按 `docs/verification/m2-writing-admin.md` 逐步做一遍人工验证。
 
 ### 写作说明
 

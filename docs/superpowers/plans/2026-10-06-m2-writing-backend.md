@@ -37,3 +37,5 @@
 - README 增加「写作后台」一节：首次设置、PAT、草稿发布。
 - 对照 spec §9 重新验收；全分支自审。
 - STOP：创建私有仓库、PAT 和 Action secret 需要站长本人操作。
+
+> 2026-10-06 补充：草稿仓库模板在 `ops/drafts-repo/`（含检查和发布两个工作流）；人工验证步骤见 `docs/verification/m2-writing-admin.md`。
