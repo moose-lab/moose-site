@@ -27,4 +27,10 @@ describe('writeAdminAssets', () => {
     expect(JSON.parse(readFileSync(join(dir, 'admin/config.json'), 'utf8')).site_url).toBeUndefined();
     expect(existsSync(join(dir, 'admin/drafts/config.json'))).toBe(true);
   });
+
+  it('has a dedicated drafts entrypoint wired to the drafts config', () => {
+    const html = readFileSync('public/admin/drafts/index.html', 'utf8');
+    expect(html).toContain('<title>Moose 草稿箱</title>');
+    expect(html).toContain('content="/admin/drafts/config.json"');
+  });
 });
