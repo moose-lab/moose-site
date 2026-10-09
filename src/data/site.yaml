@@ -2,12 +2,14 @@ name: Moose
 tagline: "运动博主 / AI 科学家。"
 taglineWavy: "白天调模型，晚上推雪橇。"
 bio: "这里是我的草稿本：训练、AI、做产品、追番，想到什么写什么。"
-avatar: ""          # [站长照片路径]
+avatar: "/images/avatar.jpg"
 now:
-  - { label: 做产品, value: "[产品名]" }
-  - { label: 备赛, value: "[下一场比赛]" }
-  - { label: 本周在练, value: "[训练重点]" }
-  - { label: 在追, value: "[本季在追的番]" }
+  - { label: 做产品, value: "视觉语言模型网关、运动相关的探索" }
+  - { label: 备赛, value: "首尔 · 广州 · 曼谷 · 万宁" }
+  - { label: 本周在练, value: "HYROX 备赛" }
+  - { label: 在剪, value: "短剧后期" }
+  - { label: 在试, value: "前沿 Agent 产品" }
+  - { label: 在追, value: "无职转生 第三季 · 黄泉的配对" }
   - { label: 在读, value: "[最近在读的论文 / 书]" }
 social:
   xiaohongshu: { label: "小红书 @[你的账号]", url: "" }
@@ -16,3 +18,9 @@ social:
 topics: [HYROX, CrossFit, 大模型, Agent, 独立开发, 运动番, 训练日志, 小红书运营]
 identity: [CrossFit, HYROX, AI 科学家, 做产品, 二次元, 小红书博主]
 photoCaption: "练完这组就去写代码"
+about: |
+  最近我在做训练和运动相关的探索，也在做一个视觉语言模型网关。我还接了一些短剧的后期剪辑，也在试用各种前沿的 Agent 产品。训练上，我在为 HYROX 备赛，也想开始练铁人三项。明年我可能试试标铁（标准距离铁人三项）。
+
+  接下来我会做很多新的、好玩的内容和产品。我开这个网站，是想给它们找一个固定的地方。朋友们也可以在这里看到我最近在做什么。想联系我、认识我，或者对我做的东西感兴趣，这个网站上的信息最完整。
+
+  一句话介绍自己：爱好太多，要做的太多，好玩的太多。
